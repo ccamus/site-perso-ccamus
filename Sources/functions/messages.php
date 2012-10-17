@@ -24,6 +24,7 @@ $msgs = array(
     "22" => "Fichier est trop gros",
     "23" => "Le fichier existe déjà sur le serveur, changez de nom de fichier, ou supprimez l'ancien.",
     "24" => "Erreur de récupération de l'article.",
+    "25" => "Pas de contenu pour cet article.",
 );
 $isError = array(
     "1" => "0",
@@ -50,6 +51,7 @@ $isError = array(
     "22" => "1",
     "23" => "1",
     "24" => "1",
+    "25" => "1",
 );
 
 ?>
