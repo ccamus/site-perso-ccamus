@@ -174,6 +174,7 @@
 		$labelLien=mysql_real_escape_string($labelLien);
 		$contenu=str_replace("\n",'<br/>',$contenu);
 		$contenu=mysql_real_escape_string($contenu);
+		$tag=mysql_real_escape_string($tag);
 					
 		$result=mysql_query('SELECT label FROM lien WHERE label=\''.$labelLien.'\';')or die ('Erreur SQL');
 		
