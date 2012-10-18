@@ -70,11 +70,22 @@ class Article{
 		//insertion dans la table article		
 		mysql_query('INSERT INTO article (dateArticle,titre,tags,idContenu) VALUES (\''.$this->date.'\',\''.$this->titre.'\',\''.$this->tags.'\',\''.$id.'\')') or die ('Erreur SQL');
 		
+		//récupération de l'id du contenu		
+		$result=mysql_query('SELECT idArticle FROM article WHERE idContenu=\''.$id.'\';') or die ('Erreur SQL');
+		
+		if($data = mysql_fetch_array($result))
+			$this->idArticle=$data['idArticle'];
+		else{
+			deco();
+			return "5";
+		}
+		
 		deco();
 		return "6";
 	}
 	
 	function delete(){
+		$rep="";
 		getBDD();
 		
 		$result=mysql_query('SELECT idContenu FROM article WHERE idArticle=\''.$this->idArticle.'\';') or die ('Erreur SQL');
@@ -123,10 +134,6 @@ class Article{
 	
 	public function getIdArticle(){
 		return $this->idArticle;
-	}
-	
-	public function setIdArticle($idArticle){
-		$this->idArticle=$idArticle;
 	}
 	
 	public function getDate(){
