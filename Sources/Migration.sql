@@ -5,6 +5,6 @@ Create table article (
 	dateArticle date NOT NULL,
 	titre char(50) NOT NULL,
 	tags text,
-	idContenu` int(11) NOT NULL,
+	idContenu int(11) NOT NULL,
 	PRIMARY KEY  (`idArticle`)
 );
