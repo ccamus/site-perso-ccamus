@@ -43,22 +43,22 @@ class Article{
 	//Enregistre un article en base
 	public function add(){
 		
-		$this->titre=mysql_real_escape_string($this->titre);
-		$this->contenu=str_replace("\n",'<br/>',$this->contenu);
-		$this->contenu=mysql_real_escape_string($this->contenu);
-		$this->tags=mysql_real_escape_string($this->tags);
+		$titre=mysql_real_escape_string($this->titre);
+		$contenu=str_replace("\n",'<br/>',$this->contenu);
+		$contenu=mysql_real_escape_string($contenu);
+		$tags=mysql_real_escape_string($this->tags);
 					
 		//pas de contenu?
-		if($this->contenu==null || $this->contenu==""){
+		if($contenu==null || $contenu==""){
 			return "4";
 		}
 		
 		getBDD();
 		//insertion du contenu
-		mysql_query('INSERT INTO contenuPage (contenu) VALUES (\''.$this->contenu.'\')') or die ('Erreur SQL');
+		mysql_query('INSERT INTO contenuPage (contenu) VALUES (\''.$contenu.'\')') or die ('Erreur SQL');
 		
 		//récupération de l'id du contenu		
-		$result=mysql_query('SELECT idContenu FROM contenuPage WHERE contenu=\''.$this->contenu.'\';') or die ('Erreur SQL');
+		$result=mysql_query('SELECT idContenu FROM contenuPage WHERE contenu=\''.$contenu.'\';') or die ('Erreur SQL');
 		
 		if($data = mysql_fetch_array($result))
 			$id=$data['idContenu'];
@@ -68,7 +68,7 @@ class Article{
 		}
 			
 		//insertion dans la table article		
-		mysql_query('INSERT INTO article (dateArticle,titre,tags,idContenu) VALUES (\''.$this->date.'\',\''.$this->titre.'\',\''.$this->tags.'\',\''.$id.'\')') or die ('Erreur SQL');
+		mysql_query('INSERT INTO article (dateArticle,titre,tags,idContenu) VALUES (\''.$this->date.'\',\''.$titre.'\',\''.$tags.'\',\''.$id.'\')') or die ('Erreur SQL');
 		
 		//récupération de l'id du contenu		
 		$result=mysql_query('SELECT idArticle FROM article WHERE idContenu=\''.$id.'\';') or die ('Erreur SQL');
@@ -110,10 +110,10 @@ class Article{
 		
 		getBDD();
 	
-		$this->titre=mysql_real_escape_string($this->titre);
-		$this->contenu=str_replace("\n",'<br/>',$this->contenu);
-		$this->contenu=mysql_real_escape_string($this->contenu);
-		$this->tags=mysql_real_escape_string($this->tags);
+		$titre=mysql_real_escape_string($this->titre);
+		$contenu=str_replace("\n",'<br/>',$this->contenu);
+		$contenu=mysql_real_escape_string($contenu);
+		$tags=mysql_real_escape_string($this->tags);
 		
 		$result=mysql_query('SELECT idContenu FROM article WHERE idArticle=\''.$this->idArticle.'\';') or die ('Erreur SQL');
 				
@@ -125,7 +125,7 @@ class Article{
 		}
 						
 		//insertion dans la table du nouveau contenu
-		$sql='UPDATE contenuPage, article SET contenuPage.contenu=\''.$this->contenu.'\', article.titre=\''.$this->titre.'\', article.tags=\''.$this->tags.'\' WHERE contenuPage.idContenu=\''.$id.'\' AND contenuPage.idContenu=article.idContenu;';
+		$sql='UPDATE contenuPage, article SET contenuPage.contenu=\''.$contenu.'\', article.titre=\''.$titre.'\', article.tags=\''.$tags.'\' WHERE contenuPage.idContenu=\''.$id.'\' AND contenuPage.idContenu=article.idContenu;';
 		mysql_query($sql) or die ('Erreur SQL : '.$sql);
 		deco();
 		
