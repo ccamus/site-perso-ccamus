@@ -1,16 +1,16 @@
 <?php
 
 /*******************************************************************************************************************************************/
-/********************Tests de la calsse article*********************************************************************************************/
+/********************Tests de la classe article*********************************************************************************************/
 /*******************************************************************************************************************************************/
 
 	
-	echo "<h1>Test de la classe Article</h1>";
+	echo "<h1>Test de la classe Article</h1><br/>";
 	
-	echo "1 - include des fonctions"
+	echo "1 - include des fonctions<br/>";
 	include('../Sources/functions.php');
 	
-	echo "2 - création de l'objet article";
+	echo "2 - création de l'objet article<br/>";
 	$article=new Article();
 	$article->setDate("12/12/2012");
 	$article->setContenu("contenu");
@@ -18,7 +18,7 @@
 	$article->setTags("tags");
 	//$article->setCommentaires($date);
 	
-	echo "3 - insertion en base de l'article";
+	echo "3 - insertion en base de l'article<br/>";
 	$article->add();
 
 ?>
