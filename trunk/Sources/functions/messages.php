@@ -25,6 +25,7 @@ $msgs = array(
     "23" => "Le fichier existe déjà sur le serveur, changez de nom de fichier, ou supprimez l'ancien.",
     "24" => "Erreur de récupération de l'article.",
     "25" => "Pas de contenu pour cet article.",
+    "26" => "Erreur de communication avec la base de données.",
 );
 $isError = array(
     "1" => "0",
@@ -52,6 +53,7 @@ $isError = array(
     "23" => "1",
     "24" => "1",
     "25" => "1",
+    "26" => "1",
 );
 
 ?>

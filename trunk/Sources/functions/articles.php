@@ -18,20 +18,30 @@ class Article{
 		if(!is_numeric($id)){
 			$rep="24";
 		}else{
-			getBDD();
+			$bdd=new BddConnector();
 			
-			$id=mysql_real_escape_string($id);
+			$requete="SELECT date, contenu, titre, tags FROM contenuPage, article WHERE idArticle=\':idArt\' AND contenuPage.idContenu=article.idContenu ;";
 			
-			$result=mysql_query('SELECT date, contenu, titre, tags FROM contenuPage, article WHERE idArticle=\''.$id.'\' AND contenuPage.idContenu=article.idContenu') or die ('Erreur SQL');
-
-			if( ! $data = mysql_fetch_array($result)){
-				$rep="24";
-			}else{				
-				$this->idArticle=$id;
-				$this->date=$data['date'];
-				$this->contenu=stripslashes($data['contenu']);
-				$this->titre=$data['titre'];
-				$this->tags=$data['tags'];
+			try{
+				$stmt = $bdd->getConnexion()->prepare($requete);
+				$stmt->bindValue(':idArt', $id, PDO::PARAM_STR);
+				$stmt->execute(); 
+				$row=$stmt->fetch();
+				$bdd->deconnexion();
+				
+				if(!isset($row['contenu'])){
+					$rep="24";
+				}else{
+					$this->idArticle=$id;
+					$this->date=$row['date'];
+					$this->contenu=stripslashes($row['contenu']);
+					$this->titre=$row['titre'];
+					$this->tags=$row['tags'];
+				}				
+			}
+			catch(PDOException $e){
+				$bdd->deconnexion();
+				$rep="26";
 			}
 		}
 		
@@ -44,8 +54,11 @@ class Article{
 	public function add(){
 		
 		$titre=mysql_real_escape_string($this->titre);
+		echo $this->contenu.'laaaaaaaaaa<br/>';
 		$contenu=str_replace("\n",'<br/>',$this->contenu);
+		echo $contenu.'laaaaaaaaaa<br/>';
 		$contenu=mysql_real_escape_string($contenu);
+		echo $contenu.'laaaaaaaaaa<br/>';
 		$tags=mysql_real_escape_string($this->tags);
 					
 		//pas de contenu?
