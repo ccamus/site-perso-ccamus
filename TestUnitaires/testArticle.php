@@ -10,7 +10,7 @@
 
 
 	$rep=testArticle();
-	if($rep==1){
+	if($rep=="1"){
 		echo "<br/><h1>ERROR</h1>";
 	}else{
 		echo "<br/><h1>OK</h1>";
@@ -25,7 +25,8 @@
 		
 		echo "2 - création de l'objet article<br/>";
 		$article=new Article();
-		$article->setDate("12/12/2012");
+		$article2=new Article();
+		$article->setDate("2012-12-27");
 		$article->setContenu("contenu");
 		$article->setTitre("Titre");
 		$article->setTags("tags");
@@ -33,14 +34,14 @@
 		
 		echo "3 - insertion en base de l'article<br/>";
 		$rep=$article->add();
-		echo $msgs[$rep]."<br/>";
+		if($rep!=""){echo $msgs[$rep]."<br/>";}
 		if($rep!=6){
 			return 1;
 		}
 		
 		echo "4 - Récupération de l'article<br/>";
-		$rep=$article2->getArticleById($article->idArticle);
-		echo $msgs[$rep]."<br/>";
+		$rep=$article2->getArticleById($article->getIdArticle());
+		if($rep!=""){echo $msgs[$rep]."<br/>";}
 		if($rep!=""){
 			return 1;
 		}
@@ -63,34 +64,35 @@
 		echo "5 - Modification de l'article<br/>";
 		$article->setTitre('titremodifié');
 		$rep=$article->modify();
-		echo $msgs[$rep]."<br/>";
+		if($rep!=""){echo $msgs[$rep]."<br/>";}
 		if($rep!=8){
 			return 1;
 		}
 		
 		echo "6 - Récupération de l'article<br/>";
-		$rep=$article2->getArticleById($article->idArticle);
-		echo $msgs[$rep]."<br/>";
+		$rep=$article2->getArticleById($article->getIdArticle());
+		if($rep!=""){echo $msgs[$rep]."<br/>";}
 		if($rep!=""){
 			return 1;
 		}
 		if('titremodifié'!=$article2->getTitre()){
-			echo '<b>le titre est différent</b><br/>';
+			echo '<b>le titre est différent</b>'.$article2->getTitre().'<br/>';
 		}
 		
 		echo "7 - Suppression de l'article<br/>";
 		$rep=$article->delete();
-		echo $msgs[$rep]."<br/>";
-		if($rep!=""){
+		if($rep!=""){echo $msgs[$rep]."<br/>";}
+		if($rep!="1"){
 			return 1;
 		}
 		
 		echo "8 - Récupération de l'article<br/>";
-		$rep=$article2->getArticleById($article->idArticle);
-		echo $msgs[$rep]."<br/>";
+		$rep=$article2->getArticleById($article->getIdArticle());
+		if($rep!=""){echo $msgs[$rep]."<br/>";}
 		if($rep==""){
 			return 1;
 		}
+		
 		return 0;
 	}
 	
