@@ -20,7 +20,7 @@ class Article{
 		}else{
 			$bdd=new BddConnector();
 			
-			$requete="SELECT date, contenu, titre, tags FROM contenuPage, article WHERE idArticle=\':idArt\' AND contenuPage.idContenu=article.idContenu ;";
+			$requete="SELECT dateArticle, contenu, titre, tags FROM contenuPage, article WHERE idArticle=:idArt AND contenuPage.idContenu=article.idContenu ;";
 			
 			try{
 				$stmt = $bdd->getConnexion()->prepare($requete);
@@ -33,7 +33,7 @@ class Article{
 					$rep="24";
 				}else{
 					$this->idArticle=$id;
-					$this->date=$row['date'];
+					$this->date=$row['dateArticle'];
 					$this->contenu=stripslashes($row['contenu']);
 					$this->titre=$row['titre'];
 					$this->tags=$row['tags'];
@@ -41,11 +41,11 @@ class Article{
 			}
 			catch(PDOException $e){
 				$bdd->deconnexion();
-				$rep="26";
+				$rep="26";				
 			}
 		}
 		
-		deco();		
+		$bdd->deconnexion();
 		
 		return $rep;
 	}
@@ -53,96 +53,158 @@ class Article{
 	//Enregistre un article en base
 	public function add(){
 		
-		$titre=mysql_real_escape_string($this->titre);
-		echo $this->contenu.'laaaaaaaaaa<br/>';
+		
 		$contenu=str_replace("\n",'<br/>',$this->contenu);
-		echo $contenu.'laaaaaaaaaa<br/>';
-		$contenu=mysql_real_escape_string($contenu);
-		echo $contenu.'laaaaaaaaaa<br/>';
-		$tags=mysql_real_escape_string($this->tags);
 					
 		//pas de contenu?
 		if($contenu==null || $contenu==""){
 			return "4";
 		}
 		
-		getBDD();
+		$bdd=new BddConnector();
 		//insertion du contenu
-		mysql_query('INSERT INTO contenuPage (contenu) VALUES (\''.$contenu.'\')') or die ('Erreur SQL');
-		
-		//récupération de l'id du contenu		
-		$result=mysql_query('SELECT idContenu FROM contenuPage WHERE contenu=\''.$contenu.'\';') or die ('Erreur SQL');
-		
-		if($data = mysql_fetch_array($result))
-			$id=$data['idContenu'];
-		else{
-			deco();
-			return "5";
-		}
+		$requete="INSERT INTO contenuPage (contenu) VALUES (:contenu);";
+		try{
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+			$stmt->execute(); 				
+				
+			//récupération de l'id du contenu		
+			$requete="SELECT idContenu FROM contenuPage WHERE contenu=:contenu;";
 			
-		//insertion dans la table article		
-		mysql_query('INSERT INTO article (dateArticle,titre,tags,idContenu) VALUES (\''.$this->date.'\',\''.$titre.'\',\''.$tags.'\',\''.$id.'\')') or die ('Erreur SQL');
-		
-		//récupération de l'id du contenu		
-		$result=mysql_query('SELECT idArticle FROM article WHERE idContenu=\''.$id.'\';') or die ('Erreur SQL');
-		
-		if($data = mysql_fetch_array($result))
-			$this->idArticle=$data['idArticle'];
-		else{
-			deco();
-			return "5";
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+			$stmt->execute(); 		
+			$row=$stmt->fetch();
+			$bdd->deconnexion();
+
+			if(!isset($row['idContenu'])){
+				$bdd->deconnexion();
+				return "5";
+			}else{
+				$id=$row['idContenu'];
+			}
+			
+			//insertion dans la table article	
+			$requete="INSERT INTO article (dateArticle,titre,tags,idContenu) VALUES (:date, :titre, :tags, :idContenu);";
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
+			$stmt->bindValue(':titre', $this->titre, PDO::PARAM_STR);
+			$stmt->bindValue(':tags', $this->tags, PDO::PARAM_STR);
+			$stmt->bindValue(':idContenu', $id, PDO::PARAM_STR);
+			$stmt->execute();
+			
+			//récupération de l'id du contenu	
+			$requete="SELECT idArticle FROM article WHERE idContenu=:id;";
+			
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':id', $id, PDO::PARAM_STR);
+			$stmt->execute(); 		
+			$row=$stmt->fetch();
+			$bdd->deconnexion();
+
+			if(!isset($row['idArticle'])){
+				$bdd->deconnexion();
+				return "5";
+			}else{
+				$this->idArticle=$row['idArticle'];
+			}
+		}
+		catch(PDOException $e){
+			$bdd->deconnexion();
+			return "26";
 		}
 		
-		deco();
+		$bdd->deconnexion();
 		return "6";
 	}
 	
 	function delete(){
 		$rep="";
-		getBDD();
 		
-		$result=mysql_query('SELECT idContenu FROM article WHERE idArticle=\''.$this->idArticle.'\';') or die ('Erreur SQL');
-				
-		if($data = mysql_fetch_array($result)){
-			$idContenu=$data['idContenu'];			
-			mysql_query('DELETE FROM article WHERE idArticle=\''.$this->idArticle.'\';') or die ('Erreur SQL');
-			mysql_query('DELETE FROM contenuPage WHERE idContenu=\''.$idContenu.'\';') or die ('Erreur SQL');
-			$rep="1";
-		}else{
+		//Récupération de l'id contenu		
+		$idContenu=$this->getIdContenuParIdArticle($this->idArticle);
+		if($idContenu=="ERROR"){
 			$rep="25";
+		}else{
+			$bdd=new BddConnector();
+			try{
+				//récupération de l'id du contenu		
+				$requete2="DELETE FROM article WHERE idArticle=:idArticle;";
+				$requete3="DELETE FROM contenuPage WHERE idContenu=:idContenu;";
+				
+				$stmt2 = $bdd->getConnexion()->prepare($requete2);
+				$stmt3 = $bdd->getConnexion()->prepare($requete3);
+				$stmt2->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
+				$stmt3->bindValue(':idContenu', $idContenu, PDO::PARAM_STR);
+				$stmt2->execute(); 	
+				$stmt3->execute(); 	
+				
+				$rep="1";
+			}
+			catch(PDOException $e){
+				$bdd->deconnexion();
+				$rep="26";
+			}
 		}
-		deco();
+		
+		$bdd->deconnexion();
 		return $rep;
 	}
 	
 	function modify(){
+		$rep="8";
 		//pas de contenu?
 		if($this->contenu==null || $this->contenu==""){
-			return "4";
+			$rep="4";
+		}else{
+			
+			$bdd=new BddConnector();
+		
+			$contenu=str_replace("\n",'<br/>',$this->contenu);
+			try{
+				//insertion dans la table du nouveau contenu
+				$requete="UPDATE contenuPage, article SET contenuPage.contenu=:contenu, article.titre=:titre, article.tags=:tags WHERE idArticle=:id AND contenuPage.idContenu=article.idContenu;";
+				$stmt = $bdd->getConnexion()->prepare($requete);
+				$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
+				$stmt->bindValue(':titre', $this->titre, PDO::PARAM_STR);
+				$stmt->bindValue(':tags', $this->tags, PDO::PARAM_STR);
+				$stmt->bindValue(':id', $this->idArticle, PDO::PARAM_STR);
+				$stmt->execute(); 	
+			}
+			catch(PDOException $e){
+				$bdd->deconnexion();
+				$rep="5";
+			}
+			$bdd->deconnexion();
 		}
 		
-		getBDD();
+		return $rep;
+	}
 	
-		$titre=mysql_real_escape_string($this->titre);
-		$contenu=str_replace("\n",'<br/>',$this->contenu);
-		$contenu=mysql_real_escape_string($contenu);
-		$tags=mysql_real_escape_string($this->tags);
-		
-		$result=mysql_query('SELECT idContenu FROM article WHERE idArticle=\''.$this->idArticle.'\';') or die ('Erreur SQL');
-				
-		if($data = mysql_fetch_array($result))
-			$id=$data['idContenu'];
-		else{
-			deco();
-			return "25";
+	private function getIdContenuParIdArticle($idArticle){
+	
+		$retour="ERROR";
+	
+		$bdd=new BddConnector();
+		//Récupération de l'id contenu
+		$requete="SELECT idContenu FROM article WHERE idArticle=:id;";
+		try{
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':id', $idArticle, PDO::PARAM_STR);
+			$stmt->execute(); 	
+			$row=$stmt->fetch();	
+			
+			if(isset($row['idContenu'])){
+				$retour=$row['idContenu'];
+			}			
 		}
-						
-		//insertion dans la table du nouveau contenu
-		$sql='UPDATE contenuPage, article SET contenuPage.contenu=\''.$contenu.'\', article.titre=\''.$titre.'\', article.tags=\''.$tags.'\' WHERE contenuPage.idContenu=\''.$id.'\' AND contenuPage.idContenu=article.idContenu;';
-		mysql_query($sql) or die ('Erreur SQL : '.$sql);
-		deco();
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}
 		
-		return "8";
+		$bdd->deconnexion();
+		return $retour;	
 	}
 	
 	public function getIdArticle(){
