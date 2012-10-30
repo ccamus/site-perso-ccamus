@@ -35,6 +35,7 @@
 				echo "Aucun retour<br/>";
 			}else{
 				echo "taille retour : ".strlen($row['contenu'])."<br/>";
+				echo $row['contenu'];
 			}			
 		}
 		catch(PDOException $e){

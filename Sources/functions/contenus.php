@@ -37,63 +37,71 @@
 		$ok=false;
 		$sortie="";
 	
-		getBDD();
-		$result=mysql_query("SELECT idLien, label FROM lien WHERE lienParent IS NULL ORDER BY idLien")or die ('Erreur SQL');
-		
-		$sortie=$sortie.' <div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<a class="brand" href="'.$localisationServeur.'"> @Charlie</a>
-				<div class="container">
- 
-					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					 </button>
-					 
-					<div class="nav-collapse collapse">
-						<ul class="nav">';
-		
-		while ($donnees = mysql_fetch_array($result)){
-			//pour chaque lien...
-			/*$sortie=$sortie."\n<li>";
-			
-			$sortie=$sortie."\n<a href='index.php?page=".$donnees['idLien']."'>".$donnees['label']."</a>";*/
-			
-			$result2=mysql_query("SELECT idLien, label FROM lien WHERE lienParent='".$donnees['idLien']."'")or die ('Erreur SQL');
-			
-			if(mysql_num_rows($result2)>0){
-				//il y a des sous liens du lien  <li class="divider"></li>
-				$sortie=$sortie.'<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$donnees['label'].'<b class="caret"></b></a>
-									<ul class="dropdown-menu">';
-				while ($donnees2 = mysql_fetch_array($result2)){
-					$sortie=$sortie."\n<li><a href='index.php?page=".$donnees2['idLien']."'>".$donnees2['label']."</a></li>";
-				}
-				$sortie=$sortie."\n</ul>
-							</li>";
-			}else{
-				//il n'y a pas de sous-liens
-				$sortie=$sortie."\n<li><a href='index.php?page=".$donnees['idLien']."'>".$donnees['label']."</a></li>";
-			}
-		}
-		//insertion du menu administrateur
-		$sortie=$sortie."\n<li>";				
-		$sortie=$sortie."\n<a href='adminInterface.php'>Administration</a>";
-		$sortie=$sortie."\n</li>";
+		$bdd=new BddConnector();
+		$requete="SELECT idLien, label FROM lien WHERE lienParent IS NULL ORDER BY idLien";
+		try{
+			$sortie=$sortie.' <div class="navbar navbar-fixed-top">
+				<div class="navbar-inner">
+					<a class="brand" href="'.$localisationServeur.'"> @Charlie</a>
+					<div class="container">
+	 
+						<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						 </button>
+						 
+						<div class="nav-collapse collapse">
+							<ul class="nav">';
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->execute(); 	
+			while ($row=$stmt->fetch()){
+				//pour chaque lien...
 				
-		$sortie=$sortie."</ul>
+				$requete2="SELECT idLien, label FROM lien WHERE lienParent=:lienParent";
+				$stmt2->bindValue(':lienParent', $row['idLien'], PDO::PARAM_STR);
+				$stmt2 = $bdd->getConnexion()->prepare($requete2);
+				$stmt2->execute(); 	
+				
+				if($row2=$stmt2->fetch()){
+					//il y a des sous liens du lien  <li class="divider"></li>
+					$sortie=$sortie.'<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$row['label'].'<b class="caret"></b></a>
+										<ul class="dropdown-menu">';
+					do{
+						$sortie=$sortie."\n<li><a href='index.php?page=".$row2['idLien']."'>".$row2['label']."</a></li>";
+					}while($row2=$stmt2->fetch());
+					$sortie=$sortie."\n</ul>
+								</li>";
+				}else{
+					//il n'y a pas de sous-liens
+					$sortie=$sortie."\n<li><a href='index.php?page=".$row['idLien']."'>".$row['label']."</a></li>";
+				}
+			}
+			$bdd->deconnexion();
+
+			//insertion du menu administrateur
+			$sortie=$sortie."\n<li>";				
+			$sortie=$sortie."\n<a href='adminInterface.php'>Administration</a>";
+			$sortie=$sortie."\n</li>";
+					
+			$sortie=$sortie."</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>";
-		//écriture dans le fichier
-		$monfichier = fopen('menu.php', 'w');
-		fputs($monfichier, $sortie);
-		fclose($monfichier);
-		$ok=true;
-		deco();
+			</div>";
+			//écriture dans le fichier
+			$monfichier = fopen('menu.php', 'w');
+			fputs($monfichier, $sortie);
+			fclose($monfichier);
+			$ok=true;
+		}
+		catch(PDOException $e){
+			$ok=false;
+			$bdd->deconnexion();
+		}
+		
 		
 		return $ok;
 	}
@@ -103,204 +111,308 @@
 /*******************************************************************************************************************************************/
 	function recupContenuByID($idLien){
 		$rep="";
-		if(!is_numeric($idLien)){
-			$rep="none";
-		}else{
-			getBDD();
-			
-			$idLien=mysql_real_escape_string($idLien);
-			
-			$result=mysql_query('SELECT label, tags, contenu FROM contenuPage,lien WHERE idLien=\''.$idLien.'\' AND contenuPage.idContenu=lien.idContenu') or die ('Erreur SQL');
-
-			if( ! $data = mysql_fetch_array($result)){
-				$data="none";
+		try{
+			if(!is_numeric($idLien)){
+				$rep="none";
+			}else{
+				$bdd=new BddConnector();
+				
+				$requete="SELECT label, tags, contenu FROM contenuPage,lien WHERE idLien=:idLien AND contenuPage.idContenu=lien.idContenu";
+				
+				$stmt = $bdd->getConnexion()->prepare($requete);
+				$stmt->bindValue(':idLien', $idLien, PDO::PARAM_STR);
+				$stmt->execute(); 	
+								
+				if($row=$stmt->fetch()){
+					$rep=$row['contenu'];
+				}else{
+					$rep="none";
+				}
 			}
+			$bdd->deconnexion();		
 		}
-		deco();
-		$data['contenu']=stripslashes($data['contenu']);
-		return $data;
+		catch(PDOException $e){
+			$rep="none";
+			$bdd->deconnexion();
+		}
+		
+		return $rep;
 	}
 
 	function getLabelParent(){
 		$sortie="<select name='lienParent'>";
-		getBDD();
+		$bdd=new BddConnector();
 		
-		$result=mysql_query('SELECT idLien, label FROM lien WHERE lienParent IS NULL ORDER BY idLien') or die ('Erreur SQL');
-		
-		$sortie=$sortie."<option value='null'>Aucun</option>";
-		
-		while ($data = mysql_fetch_array($result)){
-			$sortie=$sortie."<option value=".$data['idLien'].">".$data['label']."</option>";
+		$requete="SELECT idLien, label FROM lien WHERE lienParent IS NULL ORDER BY idLien";
+		try{
+			$sortie=$sortie."<option value='null'>Aucun</option>";
+			
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->execute(); 	
+			while ($row=$stmt->fetch()){
+				$sortie=$sortie."<option value=".$row['idLien'].">".$row['label']."</option>";
+			}
+			
+			$sortie=$sortie."</select>";
+			$bdd->deconnexion();		
 		}
-		
-		$sortie=$sortie."</select>";
-		deco();
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}
 		
 		return $sortie;
 	}
 	
 	function getLabels(){
 		$sortie="<select name='liens'>";
-		getBDD();
+		$bdd=new BddConnector();
 			
-		$result=mysql_query('SELECT idLien, label FROM lien') or die ('Erreur SQL');
-				
-		while ($data = mysql_fetch_array($result)){
-			$sortie=$sortie."<option value=".$data['idLien'].">".$data['label']."</option>";
+		$requete="SELECT idLien, label FROM lien";
+		try{	
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->execute(); 
+			
+			while ($row=$stmt->fetch()){
+				$sortie=$sortie."<option value=".$row['idLien'].">".$row['label']."</option>";
+			}
+			
+			$sortie=$sortie."</select>";
+			
+			$bdd->deconnexion();
 		}
-		
-		$sortie=$sortie."</select>";
-		deco();
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}		
 		
 		return $sortie;
 	}
 	
 	function deleteContenu($idLien){
-		getBDD();
+		$bdd=new BddConnector();
+		$retour="2";
 		
-		$idLien=mysql_real_escape_string($idLien);
+		try{	
 		
-		$result=mysql_query('SELECT idContenu FROM lien WHERE idLien=\''.$idLien.'\';') or die ('Erreur SQL');
+			$requete="SELECT idContenu FROM lien WHERE idLien=:idLien ;";
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':idLien', $idLien, PDO::PARAM_STR);
+			$stmt->execute(); 
+					
+			if($row=$stmt->fetch()){
+				$idContenu=$row['idContenu'];
 				
-		if($data = mysql_fetch_array($result)){
-			$idContenu=$data['idContenu'];			
-			mysql_query('DELETE FROM lien WHERE idLien=\''.$idLien.'\';') or die ('Erreur SQL');
-			mysql_query('DELETE FROM contenuPage WHERE idContenu=\''.$idContenu.'\';') or die ('Erreur SQL');
-			mysql_query('DELETE FROM contenuPage WHERE idContenu IN (SELECT idContenu FROM lien WHERE lienParent=\''.$idLien.'\')') or die ('Erreur SQL');
-			mysql_query('DELETE FROM lien WHERE lienParent=\''.$idLien.'\'') or die ('Erreur SQL');
-			deco();
-			return "1";
-		}else{
-			deco();
-			return "2";
+				$requete2="DELETE FROM lien WHERE idLien=:idLien ;";
+				$requete3="DELETE FROM contenuPage WHERE idContenu=:idContenu ;";
+				$requete4="DELETE FROM contenuPage WHERE idContenu IN (SELECT idContenu FROM lien WHERE lienParent=:idLien) ;";
+				$requete5="DELETE FROM lien WHERE lienParent=:idContenu ;";
+				
+				
+				$stmt2 = $bdd->getConnexion()->prepare($requete2);
+				$stmt3 = $bdd->getConnexion()->prepare($requete3);
+				$stmt4 = $bdd->getConnexion()->prepare($requete4);
+				$stmt5 = $bdd->getConnexion()->prepare($requete5);
+				
+				$stmt2->bindValue(':idLien', $idLien, PDO::PARAM_STR);
+				$stmt3->bindValue(':idContenu', $idContenu, PDO::PARAM_STR);
+				$stmt4->bindValue(':idLien', $idLien, PDO::PARAM_STR);
+				$stmt5->bindValue(':idContenu', $idContenu, PDO::PARAM_STR);
+				
+				
+				$stmt2->execute();
+				$stmt3->execute();
+				$stmt4->execute();
+				$stmt5->execute();
+				
+				$retour="1";
+			}
+			
+			$bdd->deconnexion();
 		}
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}	
+		
+		return $retour;
 	}
 	
 	function insertContenu($labelLien,$lienParent,$tag,$contenu){
+		$rep="6";
+		$bdd=new BddConnector();
 		
-		getBDD();
-		
-		$labelLien=mysql_real_escape_string($labelLien);
 		$contenu=str_replace("\n",'<br/>',$contenu);
-		$contenu=mysql_real_escape_string($contenu);
-		$tag=mysql_real_escape_string($tag);
-					
-		$result=mysql_query('SELECT label FROM lien WHERE label=\''.$labelLien.'\';')or die ('Erreur SQL');
 		
-		if(mysql_num_rows($result)>0){
-			deco();
-			return "3";
-		}
-		
-		//pas de contenu?
-		if($contenu==null || $contenu==""){
-			deco();
-			return "4";
-		}
-		//vérification que le lien parent existe et récupération de son id
-		$idLienParent=0;
-		if(!($lienParent==null || $lienParent=="" || $lienParent=="null")){
-			$idLienParent=mysql_real_escape_string($lienParent);
-		}
-		
-		//insertion du contenu
-		mysql_query('INSERT INTO contenuPage (contenu) VALUES (\''.$contenu.'\')') or die ('Erreur SQL');
-		//récupération de l'id du contenu
-		
-		$result=mysql_query('SELECT idContenu FROM contenuPage WHERE contenu=\''.$contenu.'\';') or die ('Erreur SQL');
-		
-		if($data = mysql_fetch_array($result))
-			$id=$data['idContenu'];
-		else{
-			deco();
-			return "5";
-		}
+		try{			
+			$requete="SELECT label FROM lien WHERE label=:labelLien ;";
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->execute();
 			
-		//insertion dans la table lien
-		if($lienParent==null || $lienParent=="" || $lienParent=="null"){			
-			mysql_query('INSERT INTO lien (label,idContenu,tags) VALUES (\''.$labelLien.'\',\''.$id.'\',\''.$tag.'\')') or die ('Erreur SQL');
-		}else{			
-			mysql_query('INSERT INTO lien (label,lienParent,idContenu,tags) VALUES (\''.$labelLien.'\',\''.$idLienParent.'\',\''.$id.'\',\''.$tag.'\')') or die ('Erreur SQL');
+			if($row=$stmt->fetch()){
+				$rep="3";
+			}else{			
+				//pas de contenu?
+				if((!isset($contenu)) || $contenu==""){
+					$rep="4";
+				}else{
+					if((!($lienParent==null || $lienParent=="" || $lienParent=="null")) && !is_numeric(lienParent)){
+                        //le lien parent n'est pas un nombre
+						$rep="4";
+					}else{
+						//insertion du contenu
+						$requete2="INSERT INTO contenuPage (contenu) VALUES (:contenu)";
+						$stmt2 = $bdd->getConnexion()->prepare($requete2);
+						$stmt2->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+						$stmt2->execute();
+						
+						//récupération de l'id du contenu					
+						$requete3="SELECT idContenu FROM contenuPage WHERE contenu=:contenu ;";
+						$stmt3 = $bdd->getConnexion()->prepare($requete3);
+						$stmt3->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+						$stmt3->execute();
+						
+						if($row=$stmt->fetch())
+							$id=$row['idContenu'];
+							
+							//insertion dans la table lien
+							if($lienParent==null || $lienParent=="" || $lienParent=="null"){			
+								$requete4="INSERT INTO lien (label,idContenu,tags) VALUES (:labelLien , :id , :tags )";
+								$stmt4 = $bdd->getConnexion()->prepare($requete4);
+							}else{			
+								$requete4="INSERT INTO lien (label,lienParent,idContenu,tags) VALUES (:labelLien , :lienParent , :id , :tags )";
+								$stmt4 = $bdd->getConnexion()->prepare($requete4);
+								$stmt4->bindValue(':lienParent', $idLienParent, PDO::PARAM_STR);
+							}
+							$stmt4->bindValue(':labelLien', $labelLien, PDO::PARAM_STR);
+							$stmt4->bindValue(':id', $id, PDO::PARAM_STR);
+							$stmt4->bindValue(':tags', $tag, PDO::PARAM_STR);
+							$stmt4->execute();
+						else{
+							$rep="5";
+						}
+					}
+				}
+			}
+			$bdd->deconnexion();
 		}
-		
-		deco();
-		return "6";
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}
+		return $rep;
 	}
 	
 	function changeContenu($idLien,$label,$tags,$contenu){
+		$rep="8";
+	
 		//pas de contenu?
 		if($contenu==null || $contenu==""){
-			return "4";
-		}
+			$rep="4";
+		}else{
 		
-		getBDD();
-	
-		$idLien=mysql_real_escape_string($idLien);
-		
-		$contenu=str_replace("\n",'<br/>',$contenu);
-		$contenu=mysql_real_escape_string($contenu);
-		
-		$result=mysql_query('SELECT idContenu FROM lien WHERE idLien=\''.$idLien.'\';') or die ('Erreur SQL');
+			$bdd=new BddConnector();
+			try{							
+				$contenu=str_replace("\n",'<br/>',$contenu);
 				
-		if($data = mysql_fetch_array($result))
-			$id=$data['idContenu'];
-		else{
-			deco();
-			return "7";
-		}
+				$requete="SELECT idContenu FROM lien WHERE idLien=:idLien ;";
+				$stmt = $bdd->getConnexion()->prepare($requete);
+				$stmt->bindValue(':idLien', $idLien, PDO::PARAM_STR);
+				$stmt->execute();
 						
-		//insertion dans la table du nouveau contenu
-		$sql='UPDATE contenuPage, lien SET contenuPage.contenu=\''.$contenu.'\', lien.label=\''.$label.'\', lien.tags=\''.$tags.'\' WHERE contenuPage.idContenu=\''.$id.'\' AND contenuPage.idContenu=lien.idContenu;';
-		mysql_query($sql) or die ('Erreur SQL : '.$sql);
-		deco();
+				if($row=$stmt->fetch())
+					$id=$row['idContenu'];
+					
+					//insertion dans la table du nouveau contenu
+					$requete2="UPDATE contenuPage, lien SET contenuPage.contenu=:contenu, lien.label=:label, lien.tags=:tags WHERE contenuPage.idContenu=:id AND contenuPage.idContenu=lien.idContenu ;";
+					$stmt = $bdd->getConnexion()->prepare($requete);
+					
+					$stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+					$stmt->bindValue(':label', $label, PDO::PARAM_STR);
+					$stmt->bindValue(':tags', $tags, PDO::PARAM_STR);
+					$stmt->bindValue(':id', $id, PDO::PARAM_STR);
+					
+					$stmt->execute();
+				else{
+					$rep="7";
+				}
+				$bdd->deconnexion();
+			}
+			catch(PDOException $e){
+				$bdd->deconnexion();
+			}
+		}
 		
-		return "8";
+		return $rep;
 	}
 
 /*******************************************************************************************************************************************/
 /**************************************Gestion des fichiers sur le serveur******************************************************************/
 /*******************************************************************************************************************************************/
 	function affiFiles(){
-		getBDD();
+		$bdd=new BddConnector();
+		$sortie="";
 		
-		$result=mysql_query('SELECT idFic, nom, chemin FROM fichiers') or die ('Erreur SQL');
-				
-		while ($data = mysql_fetch_array($result)){
-			echo '<tr><td><a href="'.$data['chemin'].'">'.$data['nom'].'</a></td><td><input type="checkbox" name="'.$data['idFic'].'" id="'.$data['idFic'].'" /></td></tr>';
+		$requete="SELECT idFic, nom, chemin FROM fichiers ;";
+		
+		try{
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->execute();
+			while ($row=$stmt->fetch()){
+				$sortie=$sortie.'<tr><td><a href="'.$row['chemin'].'">'.$row['nom'].'</a></td><td><input type="checkbox" name="'.$row['idFic'].'" id="'.$row['idFic'].'" /></td></tr>';
+			}
+		}
+		catch(PDOException $e){
+			$bdd->deconnexion();
 		}
 		
-		deco();
+		$bdd->deconnexion();
+		
+		return $sortie;
 	}
 	
 	function addFile($name,$dossier){
-		getBDD();
+		$bdd=new BddConnector();
 		
-		$name=mysql_real_escape_string($name);
-		$dossier=mysql_real_escape_string($dossier);
 		$path=$dossier."/".$name;
 		
-		mysql_query('INSERT INTO fichiers (nom,chemin) VALUES (\''.$name.'\',\''.$path.'\')') or die ('Erreur SQL');
-				
-		deco();
+		$requete="INSERT INTO fichiers (nom,chemin) VALUES (:name , :path )";
+		try{
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':name', $name, PDO::PARAM_STR);
+			$stmt->bindValue(':path', $path, PDO::PARAM_STR);
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}				
+		$bdd->deconnexion();
 		
 		return $name;
 	}
 	
 	function deleteFiles($_POST){
-		getBDD();
+		$bdd=new BddConnector();
 		$retour=false;
 		
-		$result=mysql_query('SELECT idFic, nom, chemin FROM fichiers') or die ('Erreur SQL');
-				
-		while ($data = mysql_fetch_array($result)){
-			//echo '<tr><td><a href="'.$data['chemin'].'">'.$data['nom'].'</a></td><td><input type="checkbox" name="'.$data['idFic'].'" id="'.$data['idFic'].'" /></td></tr>';
-			if(isset($_POST[$data['idFic']]) && $_POST[$data['idFic']]=="on"){
-				//on supprime
-				unlink($data['chemin']);
-				mysql_query('DELETE FROM fichiers WHERE idFic=\''.$data['idFic'].'\'') or die ('Erreur SQL');
-				$retour=true;
+		$requete="SELECT idFic, nom, chemin FROM fichiers ;";
+		try{
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->execute();
+			
+			while ($row=$stmt->fetch()){
+				if(isset($_POST[$row['idFic']]) && $_POST[$row['idFic']]=="on"){
+					//on supprime
+					unlink($row['chemin']);
+					$requete2="DELETE FROM fichiers WHERE idFic=:idFic ;";
+					$stmt2 = $bdd->getConnexion()->prepare($requete2);
+					$stmt2->bindValue(':idFic', $row['idFic'], PDO::PARAM_STR);
+					$stmt2->execute();
+					$retour=true;
+				}
 			}
 		}
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}
+		$bdd->deconnexion();
+		
 		return $retour;
 	}
 ?>

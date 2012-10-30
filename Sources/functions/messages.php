@@ -26,6 +26,7 @@ $msgs = array(
     "24" => "Erreur de récupération de l'article.",
     "25" => "Pas de contenu pour cet article.",
     "26" => "Erreur de communication avec la base de données.",
+    "27" => "Le lien n'est pas un nombre.",
 );
 $isError = array(
     "1" => "0",
@@ -54,6 +55,7 @@ $isError = array(
     "24" => "1",
     "25" => "1",
     "26" => "1",
+    "27" => "1",
 );
 
 ?>
