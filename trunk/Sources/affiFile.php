@@ -10,7 +10,7 @@
 		<form action="deleteFile.php" method="post">
 		<table><th>Nom du fichier</th><th>Supprimer</th>';
 		
-		affiFiles();
+		echo affiFiles();
 		
 		echo '<tr><td></td><td><input type="submit" value="Supprimer" /></td></tr>
 		</table>

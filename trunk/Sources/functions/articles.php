@@ -34,7 +34,7 @@ class Article{
 				}else{
 					$this->idArticle=$id;
 					$this->date=$row['dateArticle'];
-					$this->contenu=stripslashes($row['contenu']);
+					$this->contenu=$row['contenu'];
 					$this->titre=$row['titre'];
 					$this->tags=$row['tags'];
 				}				
