@@ -4,20 +4,29 @@
 /*******************************************utilisateur existant ?**************************************************************************/
 /*******************************************************************************************************************************************/
 	function isExist($login, $cryptedMDp){
-		getBDD();
+		$retour=false;
 		
-		$login=mysql_real_escape_string($login);
-		$cryptedMDp=mysql_real_escape_string($cryptedMDp);
-		
-		$result=mysql_query('SELECT nom,mdp FROM users WHERE nom=\''.$login.'\' AND mdp=\''.$cryptedMDp.'\';') or die ('Erreur SQL isExist');
-
-		if($row = mysql_fetch_array($result)){
-			deco();
-			return true;
-		}else{
-			deco();
-			return false;
+		$bdd=new BddConnector();
+		//Récupération de l'id contenu
+		$requete="SELECT nom,mdp FROM users WHERE nom=:nom AND mdp=:mdp;";
+		try{
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':nom', $login, PDO::PARAM_STR);
+			$stmt->bindValue(':mdp', $cryptedMDp, PDO::PARAM_STR);
+			$stmt->execute(); 	
+			$row=$stmt->fetch();	
+			
+			if(isset($row['nom'])){
+				$retour=true;
+			}			
 		}
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}
+		
+		$bdd->deconnexion();
+		
+		return $retour;
 	}
 
 /*******************************************************************************************************************************************/
