@@ -269,7 +269,7 @@
 						$stmt3->bindValue(':contenu', $contenu, PDO::PARAM_STR);
 						$stmt3->execute();
 						
-						if($row=$stmt->fetch())
+						if($row=$stmt->fetch()){
 							$id=$row['idContenu'];
 							
 							//insertion dans la table lien
@@ -285,7 +285,7 @@
 							$stmt4->bindValue(':id', $id, PDO::PARAM_STR);
 							$stmt4->bindValue(':tags', $tag, PDO::PARAM_STR);
 							$stmt4->execute();
-						else{
+						}else{
 							$rep="5";
 						}
 					}
@@ -316,7 +316,7 @@
 				$stmt->bindValue(':idLien', $idLien, PDO::PARAM_STR);
 				$stmt->execute();
 						
-				if($row=$stmt->fetch())
+				if($row=$stmt->fetch()){
 					$id=$row['idContenu'];
 					
 					//insertion dans la table du nouveau contenu
@@ -329,7 +329,7 @@
 					$stmt->bindValue(':id', $id, PDO::PARAM_STR);
 					
 					$stmt->execute();
-				else{
+				}else{
 					$rep="7";
 				}
 				$bdd->deconnexion();
