@@ -33,8 +33,8 @@
 /******************************************Fichier menu*************************************************************************************/
 /*******************************************************************************************************************************************/
 	function createMenuFile(){
-		include('InstallInfo');
-		$ok=false;
+		include('InstallInfo.php');
+		$ok="17";
 		$sortie="";
 	
 		$bdd=new BddConnector();
@@ -42,7 +42,7 @@
 		try{
 			$sortie=$sortie.' <div class="navbar navbar-fixed-top">
 				<div class="navbar-inner">
-					<a class="brand" href="'.$localisationServeur.'"> @Charlie</a>
+					<a class="brand" href="'.$localisationServeur.'">@Charlie</a>
 					<div class="container">
 	 
 						<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -60,8 +60,8 @@
 				//pour chaque lien...
 				
 				$requete2="SELECT idLien, label FROM lien WHERE lienParent=:lienParent";
-				$stmt2->bindValue(':lienParent', $row['idLien'], PDO::PARAM_STR);
 				$stmt2 = $bdd->getConnexion()->prepare($requete2);
+				$stmt2->bindValue(':lienParent', $row['idLien'], PDO::PARAM_STR);
 				$stmt2->execute(); 	
 				
 				if($row2=$stmt2->fetch()){
@@ -92,16 +92,18 @@
 				</div>
 			</div>";
 			//écriture dans le fichier
+			
+			
+		
 			$monfichier = fopen('menu.php', 'w');
 			fputs($monfichier, $sortie);
 			fclose($monfichier);
-			$ok=true;
+			$ok="18";
+			
 		}
 		catch(PDOException $e){
-			$ok=false;
 			$bdd->deconnexion();
 		}
-		
 		
 		return $ok;
 	}
@@ -124,7 +126,7 @@
 				$stmt->execute(); 	
 								
 				if($row=$stmt->fetch()){
-					$rep=$row['contenu'];
+					$rep=$row;
 				}else{
 					$rep="none";
 				}
@@ -241,9 +243,10 @@
 		
 		$contenu=str_replace("\n",'<br/>',$contenu);
 		
-		try{			
+		try{
 			$requete="SELECT label FROM lien WHERE label=:labelLien ;";
 			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':labelLien', $labelLien, PDO::PARAM_STR);
 			$stmt->execute();
 			
 			if($row=$stmt->fetch()){
@@ -258,7 +261,7 @@
 						$rep="4";
 					}else{
 						//insertion du contenu
-						$requete2="INSERT INTO contenuPage (contenu) VALUES (:contenu)";
+						$requete2="INSERT INTO contenuPage (contenu) VALUES (:contenu);";
 						$stmt2 = $bdd->getConnexion()->prepare($requete2);
 						$stmt2->bindValue(':contenu', $contenu, PDO::PARAM_STR);
 						$stmt2->execute();
@@ -269,15 +272,15 @@
 						$stmt3->bindValue(':contenu', $contenu, PDO::PARAM_STR);
 						$stmt3->execute();
 						
-						if($row=$stmt->fetch()){
-							$id=$row['idContenu'];
+						if($row2=$stmt3->fetch()){
+							$id=$row2['idContenu'];
 							
 							//insertion dans la table lien
 							if($lienParent==null || $lienParent=="" || $lienParent=="null"){			
-								$requete4="INSERT INTO lien (label,idContenu,tags) VALUES (:labelLien , :id , :tags )";
+								$requete4="INSERT INTO lien (label,idContenu,tags) VALUES (:labelLien , :id , :tags ) ;";
 								$stmt4 = $bdd->getConnexion()->prepare($requete4);
 							}else{			
-								$requete4="INSERT INTO lien (label,lienParent,idContenu,tags) VALUES (:labelLien , :lienParent , :id , :tags )";
+								$requete4="INSERT INTO lien (label,lienParent,idContenu,tags) VALUES (:labelLien , :lienParent , :id , :tags ) ;";
 								$stmt4 = $bdd->getConnexion()->prepare($requete4);
 								$stmt4->bindValue(':lienParent', $idLienParent, PDO::PARAM_STR);
 							}
@@ -286,7 +289,7 @@
 							$stmt4->bindValue(':tags', $tag, PDO::PARAM_STR);
 							$stmt4->execute();
 						}else{
-							$rep="5";
+							$rep="5";echo "la";
 						}
 					}
 				}
@@ -294,7 +297,8 @@
 			$bdd->deconnexion();
 		}
 		catch(PDOException $e){
-			$bdd->deconnexion();
+			$bdd->deconnexion();echo $e->getMessage();
+			$rep="5";
 		}
 		return $rep;
 	}
@@ -321,7 +325,7 @@
 					
 					//insertion dans la table du nouveau contenu
 					$requete2="UPDATE contenuPage, lien SET contenuPage.contenu=:contenu, lien.label=:label, lien.tags=:tags WHERE contenuPage.idContenu=:id AND contenuPage.idContenu=lien.idContenu ;";
-					$stmt = $bdd->getConnexion()->prepare($requete);
+					$stmt = $bdd->getConnexion()->prepare($requete2);
 					
 					$stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
 					$stmt->bindValue(':label', $label, PDO::PARAM_STR);
@@ -336,6 +340,7 @@
 			}
 			catch(PDOException $e){
 				$bdd->deconnexion();
+				$rep="26";
 			}
 		}
 		
@@ -345,6 +350,12 @@
 /*******************************************************************************************************************************************/
 /**************************************Gestion des fichiers sur le serveur******************************************************************/
 /*******************************************************************************************************************************************/
+	function fileAlreadyExist($file){
+		include('InstallInfo.php');
+		
+		return file_exists($folderForFiles.$file);
+	}
+
 	function affiFiles(){
 		$bdd=new BddConnector();
 		$sortie="";
@@ -367,10 +378,12 @@
 		return $sortie;
 	}
 	
-	function addFile($name,$dossier){
+	function addFile($name){
+		include('InstallInfo.php');
+	
 		$bdd=new BddConnector();
 		
-		$path=$dossier."/".$name;
+		$path=$folderForFiles.$name;
 		
 		$requete="INSERT INTO fichiers (nom,chemin) VALUES (:name , :path )";
 		try{

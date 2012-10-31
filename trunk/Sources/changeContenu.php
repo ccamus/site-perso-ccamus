@@ -8,7 +8,13 @@
 			//il existe et est authorisé
 			if(isset($_SESSION['lien']) && $_SESSION['lien']!="" && isset($_POST['contenu']) && $_POST['contenu']!=""){
 				//On change!
-				$retour=changeContenu($_SESSION['lien'],$_POST['labelLien'],$_POST['tag'],$_POST['contenu']);
+				$rep=changeContenu($_SESSION['lien'],$_POST['labelLien'],$_POST['tag'],$_POST['contenu']);
+				if($rep=="8"){
+					$rep2=createMenuFile();
+					redirAccueil($rep2);
+				}else{
+					redirAccueil($rep);	
+				}
 				redirAccueil($retour);
 			}else{
 				redirAccueil("10");

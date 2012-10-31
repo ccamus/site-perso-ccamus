@@ -2,7 +2,7 @@
 	include("functions.php");
 	
 	
-	if(isset($_GET['page']) && $contenu!="none"){
+	if(isset($_GET['page']) && is_numeric($_GET['page'])){
 		$contenu=recupContenuByID($_GET['page']);
 	}else{
 		//on affiche l'accueil

@@ -1,14 +1,16 @@
 <?php
-	function enTete($tag){
-		echo'<!DOCTYPE html>
+	function enTete($tag = null){
+		echo '<!DOCTYPE html>
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Site web de Charlie Camus</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Site web de Charlie Camus">
-    <meta name="Keywords" content="'.$tag.'">
-    <meta name="author" content="Charlie Camus">
+    <meta name="description" content="Site web de Charlie Camus">';
+    if(!is_null($tag)){
+		echo '<meta name="Keywords" content="'.$tag.'">';
+	}
+    echo '<meta name="author" content="Charlie Camus">
 
     <!-- Le styles -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
