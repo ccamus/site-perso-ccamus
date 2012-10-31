@@ -14,11 +14,8 @@
 				$rep=insertContenu($_POST['labelLien'],$_POST['lienParent'],$_POST['tag'],$_POST['contenu']);
 				
 				if($rep=="6"){
-					if(createMenuFile()){
-						redirAccueil("18");
-					}else{
-						redirAccueil("17");
-					}
+					$rep2=createMenuFile();
+					redirAccueil($rep2);
 				}else{
 					redirAccueil($rep);	
 				}				

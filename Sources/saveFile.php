@@ -9,14 +9,14 @@
 		
 		$fileName=preg_replace('/\s/', '', $_FILES['fichier']['name']);
 		
-		if(file_exists("donnes/".$fileName)){
-			 $erreur = "23";
+		if(fileAlreadyExist($fileName)){
+			$erreur = "23";
 		}
 				
 		if($erreur!=""){
 			redirAccueil($erreur);
 		}else{
-			$fileName=addFile($fileName,"donnes");
+			$fileName=addFile($fileName);
 			$resultat = move_uploaded_file($_FILES['fichier']['tmp_name'],"donnes/".$fileName);
 			enTete();
 			

@@ -21,6 +21,11 @@
 	 * En dev : http://192.168.0.10/Site_DEV
 	 * En prod : http://camus.charlie.free.fr
 	 */
-	$localisationServeur='http://192.168.0.10/Site_DEV';
-
+	$localisationServeur='http://rasbi.hd.free.fr/trunk/Sources';
+	
+	/*
+	 * Endroit où sont stockés les fichiers chargés sur le site
+	 * Par défaut : donnes
+	 */
+	$folderForFiles="donnes/";
 ?>
