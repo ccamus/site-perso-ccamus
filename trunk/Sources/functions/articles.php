@@ -141,14 +141,15 @@ class Article{
 				$stmt3->execute(); 	
 				
 				$rep="1";
+				
 			}
 			catch(PDOException $e){
 				$bdd->deconnexion();
 				$rep="26";
 			}
+			$bdd->deconnexion();
 		}
 		
-		$bdd->deconnexion();
 		return $rep;
 	}
 	
@@ -211,6 +212,10 @@ class Article{
 		return $this->idArticle;
 	}
 	
+	public function setIdArticle($idArticle){
+		$this->idArticle=$idArticle;
+	}
+	
 	public function getDate(){
 		return $this->date;
 	}
@@ -250,6 +255,31 @@ class Article{
 	public function setCommentaires($commentaires){
 		$this->commentaires=$commentaires;
 	}	
+}
+
+function listArticlesForModify(){
+	$bdd=new BddConnector();
+	
+	$sortie="<select name='articles'>";
+	
+	$requete="SELECT idArticle, titre FROM article ;";
+	
+	try{
+		$stmt = $bdd->getConnexion()->prepare($requete);
+		$stmt->execute(); 
+		
+		while($row=$stmt->fetch()){
+			$sortie=$sortie."<option value=".$row['idArticle'].">".$row['titre']."</option>";
+		}		
+		$bdd->deconnexion();		
+	}
+	catch(PDOException $e){
+		$bdd->deconnexion();				
+	}
+	
+	$sortie=$sortie."</select>";
+	
+	return $sortie;
 }
 
 ?>

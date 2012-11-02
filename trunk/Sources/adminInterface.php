@@ -79,7 +79,11 @@
 							<div class="controls">
 								<legend>Gestion des articles</legend>
 							</div>
-						
+							
+							<a href="ajoutArticle.php">Ajouter un article</a><br/>
+							<a href="modifyArticle.php">Modifier un article</a><br/>
+							<a href="deleteArticle.php">Supprimer un article</a><br/>
+							
 						</div>
 								
 						<div class="span6">
