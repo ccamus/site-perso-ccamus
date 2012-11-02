@@ -20,7 +20,7 @@
 		echo "2 - création de l'objet article<br/>";
 		$article=new Article();
 		$article2=new Article();
-		$article->setDate("2012-12-27");
+		$article->setDate("2012-12-27 00:00:00");
 		$article->setContenu("contenu");
 		$article->setTitre("Titre");
 		$article->setTags("tags");
@@ -63,7 +63,10 @@
 			return 1;
 		}
 		
-		echo "6 - Récupération de l'article<br/>";
+		echo "6 - Affichage de la liste de sélection<br/>";
+		echo listArticlesForModify()."<br/>";
+		
+		echo "7 - Récupération de l'article<br/>";
 		$rep=$article2->getArticleById($article->getIdArticle());
 		if($rep!=""){echo $msgs[$rep]."<br/>";}
 		if($rep!=""){
@@ -73,14 +76,14 @@
 			echo '<b>le titre est différent</b>'.$article2->getTitre().'<br/>';
 		}
 		
-		echo "7 - Suppression de l'article<br/>";
+		echo "8 - Suppression de l'article<br/>";
 		$rep=$article->delete();
 		if($rep!=""){echo $msgs[$rep]."<br/>";}
 		if($rep!="1"){
 			return 1;
 		}
 		
-		echo "8 - Récupération de l'article<br/>";
+		echo "9 - Récupération de l'article<br/>";
 		$rep=$article2->getArticleById($article->getIdArticle());
 		if($rep!=""){echo $msgs[$rep]."<br/>";}
 		if($rep==""){
