@@ -80,9 +80,9 @@
 								<legend>Gestion des articles</legend>
 							</div>
 							
-							<a href="ajoutArticle.php">Ajouter un article</a><br/>
-							<a href="modifyArticle.php">Modifier un article</a><br/>
-							<a href="deleteArticle.php">Supprimer un article</a><br/>
+							<i class="icon-pencil"></i> <a href="ajoutArticle.php">Ajouter un article</a><br/>
+							<i class="icon-folder-open"></i> <a href="modifyArticle.php">Modifier un article</a><br/>
+							<i class="icon-trash"></i> <a href="deleteArticle.php">Supprimer un article</a><br/>
 							
 						</div>
 								
@@ -91,14 +91,14 @@
 							<div class="controls">
 								<legend>Gestion du contenu</legend>
 							</div>
-							<a href="ajouContenu.php">Ajouter du Contenu</a><br/>
-							<a href="interfaceChangeContenu.php">Changer du Contenu</a><br/>
-							<a href="deleteContenu.php">Supprimer du Contenu</a><br/>
+							<i class="icon-pencil"></i> <a href="ajouContenu.php">Ajouter du Contenu</a><br/>
+							<i class="icon-folder-open"></i> <a href="interfaceChangeContenu.php">Changer du Contenu</a><br/>
+							<i class="icon-trash"></i> <a href="deleteContenu.php">Supprimer du Contenu</a><br/>
 							<br/><br/>
-							<a href="addFile.php">Envoyer un fichier sur le serveur</a><br/>
-							<a href="affiFile.php">Voir et/ou supprimer des fichiers sur le serveur</a><br/>
+							<i class="icon-upload"></i> <a href="addFile.php">Envoyer un fichier sur le serveur</a><br/>
+							<i class="icon-trash"></i> <a href="affiFile.php">Voir et/ou supprimer des fichiers sur le serveur</a><br/>
 							<br/><br/>
-							<a href="interfaceChangeCSS.php">Modifier les styles personnalisés</a><br/>
+							<i class="icon-picture"></i> <a href="interfaceChangeCSS.php">Modifier les styles personnalisés</a><br/>
 							
 						</div>
 					</div>
