@@ -71,17 +71,36 @@
 	basPage();
 	
 	function getAdminControl(){
-		return '<h1>Interface d\'administration</h1><br/><br/><br/>
-		<a href="ajouContenu.php">Ajouter du Contenu</a><br/>
-		<a href="interfaceChangeContenu.php">Changer du Contenu</a><br/>
-		<a href="deleteContenu.php">Supprimer du Contenu</a><br/>
-		<br/><br/>
-		<a href="addFile.php">Envoyer un fichier sur le serveur</a><br/>
-		<a href="affiFile.php">Voir et/ou supprimer des fichiers sur le serveur</a><br/>
-		<br/><br/>
-		<a href="interfaceChangeCSS.php">Modifier les styles personnalisés</a><br/>
-		<br/><br/>
-		<a href="deco.php">Se déconnecter</a>';
+		return '<div class="container">			
+					<h1>Interface d\'administration</h1><br/><br/><br/>
+					<div class="row">
+						<div class="span6">
+							
+							<div class="controls">
+								<legend>Gestion des articles</legend>
+							</div>
+						
+						</div>
+								
+						<div class="span6">
+							
+							<div class="controls">
+								<legend>Gestion du contenu</legend>
+							</div>
+							<a href="ajouContenu.php">Ajouter du Contenu</a><br/>
+							<a href="interfaceChangeContenu.php">Changer du Contenu</a><br/>
+							<a href="deleteContenu.php">Supprimer du Contenu</a><br/>
+							<br/><br/>
+							<a href="addFile.php">Envoyer un fichier sur le serveur</a><br/>
+							<a href="affiFile.php">Voir et/ou supprimer des fichiers sur le serveur</a><br/>
+							<br/><br/>
+							<a href="interfaceChangeCSS.php">Modifier les styles personnalisés</a><br/>
+							
+						</div>
+					</div>
+					<br/><br/>
+					<div align="center"><a href="deco.php" class="btn btn-large btn-info">Se déconnecter</a></div>
+				</div>';
 	}
 	
 ?>

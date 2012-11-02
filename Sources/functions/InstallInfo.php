@@ -11,7 +11,7 @@
 	$bddUser='camus.charlie';
 	
 	//mot de passe de l'utilisateur
-	$bddMdp='6pofilen';
+	$bddMdp='camus.charlie';
 	
 	//nom de la base de données
 	$nomBDD='camus_charlie';
