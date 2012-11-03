@@ -12,6 +12,8 @@
 	include('functions/affichage.php');
 	
 	include('functions/articles.php');
+	
+	include('functions/BlogReader.php');
 
 	
 ?>
