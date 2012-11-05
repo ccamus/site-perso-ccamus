@@ -39,6 +39,7 @@
 		include("generated/menu.php");
 				
 		echo '	<div class="container">';
+		
 		if(isset($_GET['message']) && $_GET['message']!=''){
 			include('messages.php');
 			if($msgs[$_GET['message']]!=""){
