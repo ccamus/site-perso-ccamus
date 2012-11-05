@@ -95,7 +95,7 @@
 			
 			
 		
-			$monfichier = fopen('menu.php', 'w');
+			$monfichier = fopen('generated/menu.php', 'w');
 			fputs($monfichier, $sortie);
 			fclose($monfichier);
 			$ok="18";

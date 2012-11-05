@@ -1,21 +1,37 @@
 <?php
 	function getCss(){
-		$css="";
-		
-		$monfichier = fopen('stylePerso.css', 'r');
-		while (!feof($monfichier)) { //on parcourt toutes les lignes
-			$css .= fgets($monfichier, 4096); // lecture du contenu de la ligne
-		}
-		fclose($monfichier);
-		
-		return $css;
+		return readGeneratedFile('generated/stylePerso.css');
 	}
 	
 	function setCss($css){
+		return writeGeneratedFile('generated/stylePerso.css',$css);
+	}
+	
+	function getHeadAccueil(){
+		return readGeneratedFile('generated/headAccueil.html');
+	}
+	
+	function setHeadAccueil($text){
+		return writeGeneratedFile('generated/headAccueil.html',$text);
+	}
+	
+	function readGeneratedFile($file){
+		$retour="";
+		
+		$monfichier = fopen($file, 'r');
+		while (!feof($monfichier)) { //on parcourt toutes les lignes
+			$retour .= fgets($monfichier, 4096); // lecture du contenu de la ligne
+		}
+		fclose($monfichier);
+		
+		return $retour;
+	}
+	
+	function writeGeneratedFile($file,$text){
 		$ok=false;
 		
-		$monfichier = fopen('stylePerso.css', 'w');
-		fputs($monfichier, $css);
+		$monfichier = fopen($file, 'w');
+		fputs($monfichier, $text);
 		fclose($monfichier);
 		$ok=true;
 		
