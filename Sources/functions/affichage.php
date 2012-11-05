@@ -57,7 +57,7 @@
 	}
 	
 	function echoStyle(){
-		$monfichier = fopen('stylePerso.css', 'r');
+		$monfichier = fopen('generated/stylePerso.css', 'r');
 		
 		echo '<p>Styles personnalisés :<br/>
 						<table class="table">';
