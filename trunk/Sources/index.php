@@ -4,12 +4,13 @@
 	
 	if(isset($_GET['page']) && is_numeric($_GET['page'])){
 		$contenu=recupContenuByID($_GET['page']);
+		enTete($contenu['tags']);
+		echo stripslashes($contenu['contenu']);
 	}else{
 		//on affiche l'accueil
-		$contenu=recupContenuByID(0);
+		enTete();
+		include('blog.php');
 	}
-	enTete($contenu['tags']);
-	echo $contenu['contenu'];
 	
 	basPage();
 ?>
