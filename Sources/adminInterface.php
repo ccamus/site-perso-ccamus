@@ -99,6 +99,7 @@
 							<i class="icon-trash"></i> <a href="affiFile.php">Voir et/ou supprimer des fichiers sur le serveur</a><br/>
 							<br/><br/>
 							<i class="icon-picture"></i> <a href="interfaceChangeCSS.php">Modifier les styles personnalisés</a><br/>
+							<i class="icon-picture"></i> <a href="interfaceChangeHeadAccueil.php">Modifier le header d\'accueil</a><br/>
 							
 						</div>
 					</div>

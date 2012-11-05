@@ -18,7 +18,7 @@
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="google-code-prettify/prettify.css" type="text/css" charset="UTF-8" /> 
 	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-	<link rel="stylesheet" href="stylePerso.css" type="text/css" charset="UTF-8" /> 
+	<link rel="stylesheet" href="generated/stylePerso.css" type="text/css" charset="UTF-8" /> 
 	
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -36,7 +36,7 @@
 
   <body onload="prettyPrint()">';
 						
-		include("menu.php");
+		include("generated/menu.php");
 				
 		echo '	<div class="container">';
 		if(isset($_GET['message']) && $_GET['message']!=''){

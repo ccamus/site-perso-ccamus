@@ -28,6 +28,8 @@ $msgs = array(
     "26" => "Erreur de communication avec la base de données.",
     "27" => "Le lien n'est pas un nombre.",
     "28" => "Article inconnu.",
+    "29" => "Modification du header d'accueil effectuée.",
+    "30" => "Erreur à l'enregistrement du header d'accueil.",
 );
 $isError = array(
     "1" => "0",
@@ -58,6 +60,8 @@ $isError = array(
     "26" => "1",
     "27" => "1",
     "28" => "1",
+    "29" => "0",
+    "30" => "1",
 );
 
 ?>
