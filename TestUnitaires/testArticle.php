@@ -24,7 +24,6 @@
 		$article->setContenu("contenu");
 		$article->setTitre("Titre");
 		$article->setTags("tags");
-		//$article->setCommentaires($date);
 		
 		echo "3 - insertion en base de l'article<br/>";
 		$rep=$article->add();

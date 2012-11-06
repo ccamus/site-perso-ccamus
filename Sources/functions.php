@@ -14,6 +14,8 @@
 	include('functions/articles.php');
 	
 	include('functions/BlogReader.php');
+	
+	include('functions/commentaire.php');
 
 	
 ?>
