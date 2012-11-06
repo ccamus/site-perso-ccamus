@@ -30,6 +30,9 @@ $msgs = array(
     "28" => "Article inconnu.",
     "29" => "Modification du header d'accueil effectuée.",
     "30" => "Erreur à l'enregistrement du header d'accueil.",
+    "31" => "Vous devez entrer votre nom.",
+    "32" => "Cet article n'existe pas.",
+    "33" => "Commentaire ajouté.",
 );
 $isError = array(
     "1" => "0",
@@ -62,6 +65,9 @@ $isError = array(
     "28" => "1",
     "29" => "0",
     "30" => "1",
+    "31" => "1",
+    "32" => "1",
+    "33" => "0",
 );
 
 ?>

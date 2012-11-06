@@ -9,7 +9,6 @@ class Article{
 	private $contenu;
 	private $titre;
 	private $tags;
-	private $commentaires;
 	
 	//Récupère un article selon son id
 	public function getArticleById($id){
@@ -52,8 +51,7 @@ class Article{
 	
 	//Enregistre un article en base
 	public function add(){
-		
-		
+				
 		$contenu=str_replace("\n",'<br/>',$this->contenu);
 					
 		//pas de contenu?
@@ -120,7 +118,7 @@ class Article{
 	}
 	
 	function delete(){
-		$rep="";
+		$rep="1";
 		
 		//Récupération de l'id contenu		
 		$idContenu=$this->getIdContenuParIdArticle($this->idArticle);
@@ -139,9 +137,7 @@ class Article{
 				$stmt3->bindValue(':idContenu', $idContenu, PDO::PARAM_STR);
 				$stmt2->execute(); 	
 				$stmt3->execute(); 	
-				
-				$rep="1";
-				
+								
 			}
 			catch(PDOException $e){
 				$bdd->deconnexion();
@@ -249,11 +245,15 @@ class Article{
 	}
 	
 	public function getCommentaires(){
-		return $this->commentaires;
+		return getCommentaireByArticleId($this->idArticle);
 	}
 	
-	public function setCommentaires($commentaires){
-		$this->commentaires=$commentaires;
+	public function getCountCommentaires(){
+		return countCommentaireByArticle($this->idArticle);
+	}
+	
+	public function addCommentaire($commentaire){
+		$commentaire->add();;
 	}	
 }
 

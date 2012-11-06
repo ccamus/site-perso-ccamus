@@ -8,3 +8,12 @@ Create table article (
 	idContenu int(11) NOT NULL,
 	PRIMARY KEY  (`idArticle`)
 );
+
+Create table commentaire (
+	idCommentaire int(11) NOT NULL auto_increment,
+	dateComm datetime NOT NULL,
+	commentateur char(50) NOT NULL,
+	commentaire text,
+	idArticle int(11) NOT NULL,
+	PRIMARY KEY  (`idCommentaire`)
+);
