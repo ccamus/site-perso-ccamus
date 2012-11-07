@@ -15,7 +15,7 @@
 					redirAccueil("20");
 				}
 			}else{
-				enTete();
+				enTete(null,"Modification du css");
 				
 				//on cherche à modifier le contenu
 				echo '<form class="form-horizontal" method="post" action="interfaceChangeCSS.php">

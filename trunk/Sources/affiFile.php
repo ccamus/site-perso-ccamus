@@ -4,7 +4,7 @@
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd']) && isExist($_SESSION['userName'],$_SESSION['pwd'])){
 		//il est connecté?
-		enTete();
+		enTete(null,"Affichage des fichiers");
 		
 		echo '<h1>Liste des fichiers existants sur le serveur</h1><br/><br/><br/><br/>
 		<form action="deleteFile.php" method="post">

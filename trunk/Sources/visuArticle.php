@@ -9,7 +9,7 @@
 		$rep=$article->getArticleById($_GET['art']);
 		if($rep==""){
 			
-			enTete($article->getTags());
+			enTete($article->getTags(),"@Charlie - ".$article->getTitre());
 			
 			//affichage de l'article
 			echo '<div class="page-header"><h1>'.$article->getTitre().'</h1></div><br/>';
