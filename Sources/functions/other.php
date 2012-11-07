@@ -52,9 +52,9 @@
 		include('messages.php');
 		include('InstallInfo.php');
 		if($msgs[$message]!=''){
-			header('Location: '.$localisationServeur.'/visuArticle.php?message='.$message.'&art='.$idArticle);
+			header('Location: '.$localisationServeur.'/visuArticle.php?message='.$message.'&art='.$idArticle.'#addCom');
 		}else{
-			header('Location: '.$localisationServeur.'/visuArticle.php');
+			header('Location: '.$localisationServeur.'/visuArticle.php?art='.$idArticle.'#addCom');
 		}
 	}
 ?>

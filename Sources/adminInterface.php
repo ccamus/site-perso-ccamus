@@ -84,6 +84,12 @@
 							<i class="icon-folder-open"></i> <a href="modifyArticle.php">Modifier un article</a><br/>
 							<i class="icon-trash"></i> <a href="deleteArticle.php">Supprimer un article</a><br/>
 							
+							<div class="controls">
+								<legend>Gestion des Commentaires</legend>
+							</div>
+							
+							La gestion des commentaires se fait sur la page de visualisation des articles.
+							
 						</div>
 								
 						<div class="span6">

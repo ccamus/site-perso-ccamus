@@ -45,11 +45,11 @@
 			if($msgs[$_GET['message']]!=""){
 				if($isError[$_GET['message']]=="1"){
 					echo '<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">×</button>
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h4>Erreur!</h4>'.$msgs[$_GET['message']].'</div>';
 				}else{
 					echo '<div class="alert alert-success">
-						<button type="button" class="close" data-dismiss="alert">×</button>
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h4>:)</h4>'.$msgs[$_GET['message']].'</div>';
 				}
 			}
