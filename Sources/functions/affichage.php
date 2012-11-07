@@ -1,10 +1,10 @@
 <?php
-	function enTete($tag = null){
+	function enTete($tag = null,$titre = "home"){
 		echo '<!DOCTYPE html>
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Site web de Charlie Camus</title>
+    <title>'.$titre.'</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Site web de Charlie Camus">';
     if(!is_null($tag)){

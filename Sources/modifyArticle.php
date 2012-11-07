@@ -7,7 +7,7 @@
 		if(isExist($_SESSION['userName'],$_SESSION['pwd'])){
 			//il existe et est authorisé
 			
-			enTete();
+			enTete(null,"Modification d'article");
 			
 			if(isset($_POST['articles']) && $_POST['articles']!=""){
 				//interface de changement de contenu

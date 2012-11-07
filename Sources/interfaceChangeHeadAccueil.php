@@ -15,7 +15,7 @@
 					redirAccueil("30");
 				}
 			}else{
-				enTete();
+				enTete(null,"Changement de l\'en tête");
 				
 				//on cherche à modifier le contenu
 				echo '<form class="form-horizontal" method="post" action="interfaceChangeHeadAccueil.php">
