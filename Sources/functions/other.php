@@ -42,9 +42,19 @@
 		include('messages.php');
 		include('InstallInfo.php');
 		if($msgs[$message]!=''){
-			header('Location: '.$localisationServeur.'?message='.$message);
+			header('Location: '.$localisationServeur.'/index.php?message='.$message);
 		}else{
-			header('Location: '.$localisationServeur);
+			header('Location: '.$localisationServeur.'/index.php');
+		}
+	}
+	
+	function redirVisuArticle($idArticle,$message){
+		include('messages.php');
+		include('InstallInfo.php');
+		if($msgs[$message]!=''){
+			header('Location: '.$localisationServeur.'/visuArticle.php?message='.$message.'&art='.$idArticle);
+		}else{
+			header('Location: '.$localisationServeur.'/visuArticle.php');
 		}
 	}
 ?>

@@ -26,14 +26,14 @@
 	foreach($arrayArticles as $article){
 		echo '<div class="row"><div class="span1"></div>';
 		echo '<div class="span10"><div class="well">';
-		echo '<p class="pull-right"><i class="icon-calendar"></i> '.$article->getDate().'</p>';
+		echo '<p class="pull-right"><i class="icon-calendar"></i> <small>'.$article->getDate().'</small></p>';
 		echo '<a href="visuArticle.php?art='.$article->getIdArticle().'"><h2>'.$article->getTitre().'</h2></a>';
 		echo substr(stripslashes($article->getContenu()),0,700).'...<span class="label label-default"><a href="visuArticle.php?art='.$article->getIdArticle().'">Lire la suite</a></span>';
 		$nb=$article->getCountCommentaires();
 		echo '<br/><small><a href="visuArticle.php?art='.$article->getIdArticle().'#com"><span class="badge badge-info">'.$nb.'</span> commentaire';
 		if($nb>1){echo "s";}
 		echo '</a></small>';
-		echo '<p class="pull-right"><i class="icon-tags"></i> '.$article->getTags().'</p><br/>';
+		echo '<p class="pull-right"><i class="icon-tags"></i> <small>'.$article->getTags().'</small></p><br/>';
 		echo '</div></div>';
 		echo '<div class="span1"></div></div>
 			';

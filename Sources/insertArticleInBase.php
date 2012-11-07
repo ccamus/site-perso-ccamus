@@ -13,7 +13,7 @@
 				
 				$article=new Article();
 				
-				$article->setDate(date("Y-m-d H:m:s"));
+				$article->setDate(date("Y-m-d H:i:s"));
 				$article->setContenu($_POST['contenu']);
 				$article->setTitre($_POST['titreArticle']);
 				$article->setTags($_POST['tag']);
