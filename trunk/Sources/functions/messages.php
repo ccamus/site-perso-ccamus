@@ -33,6 +33,10 @@ $msgs = array(
     "31" => "Vous devez entrer votre nom.",
     "32" => "Cet article n'existe pas.",
     "33" => "Commentaire ajouté.",
+    "34" => "L'article sur lequel vous cherchez à poster un commentaire n'existe pas.",
+    "35" => "Ce nom d'utilisateur est réservé.",
+    "36" => "Merci de renseigner un nom d'utilisateur ainsi que votre commentaire.",
+    "37" => "Erreur captcha.",
 );
 $isError = array(
     "1" => "0",
@@ -68,6 +72,10 @@ $isError = array(
     "31" => "1",
     "32" => "1",
     "33" => "0",
+    "34" => "1",
+    "35" => "1",
+    "36" => "1",
+    "37" => "1",
 );
 
 ?>

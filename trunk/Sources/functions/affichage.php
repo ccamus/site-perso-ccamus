@@ -13,11 +13,11 @@
     echo '<meta name="author" content="Charlie Camus">
 
     <!-- Le styles -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" /> 
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="google-code-prettify/prettify.css" type="text/css" charset="UTF-8" /> 
-	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+    <link href="libraries/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="libraries/google-code-prettify/prettify.css" type="text/css" charset="UTF-8" /> 
+	<script type="text/javascript" src="libraries/google-code-prettify/prettify.js"></script>
 	<link rel="stylesheet" href="generated/stylePerso.css" type="text/css" charset="UTF-8" /> 
 	
 
@@ -101,7 +101,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
 
   
 

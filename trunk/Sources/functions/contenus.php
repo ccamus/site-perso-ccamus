@@ -28,6 +28,30 @@
 		
 		return $retour;
 	}
+	
+	function userExist($userName){
+		$retour=false;
+		
+		$bdd=new BddConnector();
+		//Récupération de l'id contenu
+		$requete="SELECT nom FROM users WHERE nom=:nom;";
+		try{
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':nom', $userName, PDO::PARAM_STR);
+			$stmt->execute();
+			
+			if($row=$stmt->fetch()){
+				$retour=true;
+			}			
+		}
+		catch(PDOException $e){
+			$bdd->deconnexion();
+		}
+		
+		$bdd->deconnexion();
+		
+		return $retour;
+	}
 
 /*******************************************************************************************************************************************/
 /******************************************Fichier menu*************************************************************************************/
