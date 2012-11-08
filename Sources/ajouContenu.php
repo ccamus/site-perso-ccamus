@@ -6,7 +6,8 @@
 		if(isExist($_SESSION['userName'],$_SESSION['pwd'])){
 			//il existe et est authorisé
 			
-			enTete(null,"Ajout de contenu");
+			include('functions/InstallInfo.php');
+			enTete(null,$siteName." - Ajout de contenu");
 			echo '<form class="form-horizontal" method="post" action="insertContenuInBase.php">
 						<div class="controls">
 							<legend>Insertion de contenu</legend>

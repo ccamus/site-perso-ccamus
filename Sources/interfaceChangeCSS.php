@@ -15,7 +15,8 @@
 					redirAccueil("20");
 				}
 			}else{
-				enTete(null,"Modification du css");
+				include('functions/InstallInfo.php');
+				enTete(null,$siteName." - Modification du css");
 				
 				//on cherche à modifier le contenu
 				echo '<form class="form-horizontal" method="post" action="interfaceChangeCSS.php">

@@ -1,12 +1,13 @@
 <?php
 	session_start();
 	include("functions.php");
+	include('functions/InstallInfo.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut ajouter du contenu, le peut il?
 		if(isExist($_SESSION['userName'],$_SESSION['pwd'])){
 			//il existe et est authorisé
-			enTete(null,"@Charlie - Interface d'administration");
+			enTete(null,$siteName." - Interface d'administration");
 			echo(getAdminControl());
 		}else{
 			redirAccueil("9");
@@ -18,7 +19,7 @@
 				$_SESSION['userName']=$_POST['pseudo'];
 				$_SESSION['pwd']=md5($_POST['pass']);
 				//il existe et est authorisé
-				enTete(null,"@Charlie - Interface d'administration");
+				enTete(null,$siteName." - Interface d'administration");
 				echo(getAdminControl());
 			}else{
 				redirAccueil("9");
@@ -26,7 +27,7 @@
 			
 		}else{			
 			// il veut se connecter
-			enTete(null,"@Charlie - Interface d'administration");
+			enTete(null,$siteName." - Interface d'administration");
 			echo '<div class="container">			
 			<div class="row">
 				<div class="span6">

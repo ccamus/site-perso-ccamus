@@ -4,7 +4,8 @@
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd']) && isExist($_SESSION['userName'],$_SESSION['pwd'])){
 		//il est connecté?
-		enTete(null,"Ajout de fichier");
+		include('functions/InstallInfo.php');
+		enTete(null,$siteName." - Ajout de fichier");
 		echo '<form class="form-horizontal" method="post" action="saveFile.php" enctype="multipart/form-data">
 						<div class="controls">
 							<legend>Ajout de fichiers</legend>

@@ -9,7 +9,8 @@
 		$rep=$article->getArticleById($_GET['art']);
 		if($rep==""){
 			
-			enTete($article->getTags(),"@Charlie - ".$article->getTitre());
+			include('functions/InstallInfo.php');
+			enTete($article->getTags(),$siteName." - ".$article->getTitre());
 			
 			//affichage de l'article
 			echo '<div class="page-header"><h1>'.$article->getTitre().'</h1></div><br/>';

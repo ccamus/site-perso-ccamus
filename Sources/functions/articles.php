@@ -130,13 +130,19 @@ class Article{
 				//récupération de l'id du contenu		
 				$requete2="DELETE FROM article WHERE idArticle=:idArticle;";
 				$requete3="DELETE FROM contenuPage WHERE idContenu=:idContenu;";
+				$requete4="DELETE FROM commentaire WHERE idArticle=:idArticle;";
 				
 				$stmt2 = $bdd->getConnexion()->prepare($requete2);
 				$stmt3 = $bdd->getConnexion()->prepare($requete3);
+				$stmt4 = $bdd->getConnexion()->prepare($requete4);
+				
 				$stmt2->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
 				$stmt3->bindValue(':idContenu', $idContenu, PDO::PARAM_STR);
+				$stmt4->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
+				
 				$stmt2->execute(); 	
 				$stmt3->execute(); 	
+				$stmt4->execute(); 	
 								
 			}
 			catch(PDOException $e){
