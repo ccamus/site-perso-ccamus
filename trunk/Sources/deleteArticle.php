@@ -5,7 +5,8 @@
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		if(isExist($_SESSION['userName'],$_SESSION['pwd'])){
 			//il existe et est authorisé
-			enTete(null,"Suppression d'article");
+			include('functions/InstallInfo.php');
+			enTete(null,$siteName." - Suppression d'article");
 			echo '<form class="form-horizontal" method="post" action="DeleteArticleInBase.php">
 						<div class="controls">
 							<legend>Suppression d\'article</legend>

@@ -7,7 +7,8 @@
 		if(isExist($_SESSION['userName'],$_SESSION['pwd'])){
 			//il existe et est authorisé
 			
-			enTete(null,"Modification de contenu");
+			include('functions/InstallInfo.php');
+			enTete(null,$siteName." - Modification de contenu");
 			
 			if(isset($_POST['liens']) && $_POST['liens']!=""){
 				//interface de changement de contenu

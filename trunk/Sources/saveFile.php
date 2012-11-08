@@ -18,7 +18,8 @@
 		}else{
 			$fileName=addFile($fileName);
 			$resultat = move_uploaded_file($_FILES['fichier']['tmp_name'],"donnes/".$fileName);
-			enTete();
+			include('functions/InstallInfo.php');
+			enTete($article->getTags(),$siteName." - Fichier ajouté");
 			
 			if ($resultat) echo "Transfert réussi<br/> Vous pouvez maintenant faire un appel sur ce fichier en utilisant le chemin suivant :<br/>"."donnes/".$fileName;
 		}
