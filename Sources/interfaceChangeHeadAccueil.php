@@ -28,7 +28,7 @@
 						<div class="control-group">
 							<label class="control-label" for="contenu">Nouveau header d\'accueil :</label>
 							<div class="controls">
-								<textarea name="contenu" id="contenu" rows="20" cols="100">'.getHeadAccueil().'</textarea>
+								<textarea name="contenu" id="contenu" rows="20" class="span6">'.getHeadAccueil().'</textarea>
 							</div>
 						</div>
 						

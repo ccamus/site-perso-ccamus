@@ -102,7 +102,6 @@ class Article{
 			$bdd->deconnexion();
 
 			if(!isset($row['idArticle'])){
-				$bdd->deconnexion();
 				return "5";
 			}else{
 				$this->idArticle=$row['idArticle'];

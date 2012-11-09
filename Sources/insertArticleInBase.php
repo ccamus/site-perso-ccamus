@@ -19,6 +19,14 @@
 				$article->setTags($_POST['tag']);
 				$rep=$article->add();
 				
+				if($rep=="6" && isset($_POST['tweet']) && $_POST['tweet']=="tweet"){
+					include('functions/InstallInfo.php');
+					$rep2=tweet("Nouvel article sur ".$siteName." : ".$article->getTitre()." ".$localisationServeur."/visuArticle.php?art=".$article->getIdArticle());
+					if(!$rep2){
+						redirAccueil("38");	
+					}
+				}
+				
 				redirAccueil($rep);	
 			}else{
 				redirAccueil("16");
