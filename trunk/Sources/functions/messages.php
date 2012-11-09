@@ -37,6 +37,7 @@ $msgs = array(
     "35" => "Ce nom d'utilisateur est réservé.",
     "36" => "Merci de renseigner un nom d'utilisateur ainsi que votre commentaire.",
     "37" => "Erreur captcha.",
+    "38" => "Erreur twitter, l'article a tout de même été correctement créé.",
 );
 $isError = array(
     "1" => "0",
@@ -76,6 +77,7 @@ $isError = array(
     "35" => "1",
     "36" => "1",
     "37" => "1",
+    "38" => "1",
 );
 
 ?>

@@ -3,7 +3,7 @@
 	function tweet($text){
 		$retour=false;
 
-		include('../Sources/libraries/tmhOAuth.php');
+		include('libraries/tmhOAuth.php');
 		include('InstallInfo.php');
 		
 		$tmhOAuth = new tmhOAuth(array(
@@ -22,10 +22,6 @@
 		}
 		
 		return $retour;
-	}
-	
-	function sendToFacebook($text){
-		
 	}
 	
 ?>

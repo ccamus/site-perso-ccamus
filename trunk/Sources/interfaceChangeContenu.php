@@ -36,7 +36,7 @@
 						<div class="control-group">
 							<label class="control-label" for="contenu">Nouveau contenu :</label>
 							<div class="controls">
-								<textarea name="contenu" id="contenu" rows="20" cols="100">'.str_replace('<br/>',"\n",$data['contenu']).'</textarea>
+								<textarea name="contenu" id="contenu" rows="20" class="span6">'.str_replace('<br/>',"\n",$data['contenu']).'</textarea>
 							</div>
 						</div>
 						

@@ -37,7 +37,7 @@
 						<div class="control-group">
 							<label class="control-label" for="contenu">Contenu :</label>
 							<div class="controls">
-								<textarea name="contenu" id="contenu" rows="20" cols="100"></textarea>
+								<textarea name="contenu" id="contenu" rows="20" class="span6"></textarea>
 							</div>
 						</div>
 						

@@ -28,7 +28,7 @@
 						<div class="control-group">
 							<label class="control-label" for="contenu">Nouveau CSS :</label>
 							<div class="controls">
-								<textarea name="contenu" id="contenu" rows="20" cols="100">'.getCss().'</textarea>
+								<textarea name="contenu" id="contenu" rows="20" class="span6">'.getCss().'</textarea>
 							</div>
 						</div>
 						
