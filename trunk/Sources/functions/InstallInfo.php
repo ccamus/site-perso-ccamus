@@ -10,7 +10,8 @@
 	 * En dev : localhost
 	 * En Prod : camus.charlie.sql.free.fr
 	 */
-	$bddPlace='localhost';
+	//$bddPlace='localhost';
+	$bddPlace='/home/pi/www/sqlite/test.sqlite3';
 	
 	//utilisateur de la base de données
 	$bddUser='camus.charlie';
@@ -20,6 +21,12 @@
 	
 	//nom de la base de données
 	$nomBDD='camus_charlie';
+	
+	/*
+	 * type de base de données
+	 * Types reconnus : mysql sqlite
+	 */
+	$typeDb='sqlite';
 	
 	/*
 	 * Endroit où est localisé la page d'accueil.
