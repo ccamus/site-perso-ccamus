@@ -6,6 +6,7 @@
 		private $user;
 		private $password;
 		private $connexion;
+		private $typeDb;
 		
 		public function __construct(){
 			include('InstallInfo.php');
@@ -13,11 +14,21 @@
 			$this->database=$nomBDD;
 			$this->user=$bddUser;
 			$this->password=$bddMdp;
+			if($typeDb!="mysql" && $typeDb!="sqlite"){
+				throw new Exception('Type de base de données non reconnu');
+			}else{
+				$this->typeDb=$typeDb;
+			}
 		}
 		  
 		private function connexion() {
 			try {
-				$this->connexion=new PDO('mysql:host='.$this->host.';dbname='.$this->database,$this->user,$this->password);
+				if($this->typeDb=="mysql"){
+					$this->connexion=new PDO('mysql:host='.$this->host.';dbname='.$this->database,$this->user,$this->password);
+				}
+				if($this->typeDb=="sqlite"){
+					$this->connexion=new PDO('sqlite:'.$this->host);
+				}
 				$this->connexion->setattribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 			}
 			catch(PDOException $e)

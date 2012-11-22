@@ -19,7 +19,7 @@
 		echo "2 - création de l'objet BddConnector<br/>";
 		$bdd=new BddConnector();
 			
-		$requete="SELECT contenu FROM contenuPage;";
+		$requete="SELECT nom FROM users;";
 		
 		try{
 			echo "3 - Premier appel de GetConnection<br/>";
@@ -31,11 +31,11 @@
 			$row=$stmt->fetch();
 			$bdd->deconnexion();
 			
-			if(!isset($row['contenu'])){
+			if(!isset($row['nom'])){
 				echo "Aucun retour<br/>";
 			}else{
-				echo "taille retour : ".strlen($row['contenu'])."<br/>";
-				echo $row['contenu'];
+				echo "taille retour : ".strlen($row['nom'])."<br/>";
+				echo $row['nom'];
 			}			
 		}
 		catch(PDOException $e){
