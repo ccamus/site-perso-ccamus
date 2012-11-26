@@ -15,7 +15,7 @@
 			$stmt->bindValue(':mdp', $cryptedMDp, PDO::PARAM_STR);
 			$stmt->execute(); 	
 			$row=$stmt->fetch();	
-			
+			if(is_object($stmt)){$stmt->closeCursor();}
 			if(isset($row['nom'])){
 				$retour=true;
 			}			
@@ -42,7 +42,8 @@
 			
 			if($row=$stmt->fetch()){
 				$retour=true;
-			}			
+			}
+			if(is_object($stmt)){$stmt->closeCursor();}			
 		}
 		catch(PDOException $e){
 			$bdd->deconnexion();
@@ -102,7 +103,10 @@
 					//il n'y a pas de sous-liens
 					$sortie=$sortie."\n<li><a href='index.php?page=".$row['idLien']."'>".$row['label']."</a></li>";
 				}
-			}
+				if(is_object($stmt2)){$stmt2->closeCursor();}
+			}			
+			if(is_object($stmt)){$stmt->closeCursor();}
+			
 			$bdd->deconnexion();
 
 			//insertion du menu administrateur
@@ -154,6 +158,7 @@
 				}else{
 					$rep="none";
 				}
+				if(is_object($stmt)){$stmt->closeCursor();}
 			}
 			$bdd->deconnexion();		
 		}
@@ -178,7 +183,7 @@
 			while ($row=$stmt->fetch()){
 				$sortie=$sortie."<option value=".$row['idLien'].">".$row['label']."</option>";
 			}
-			
+			if(is_object($stmt)){$stmt->closeCursor();}
 			$sortie=$sortie."</select>";
 			$bdd->deconnexion();		
 		}
@@ -201,7 +206,7 @@
 			while ($row=$stmt->fetch()){
 				$sortie=$sortie."<option value=".$row['idLien'].">".$row['label']."</option>";
 			}
-			
+			if(is_object($stmt)){$stmt->closeCursor();}
 			$sortie=$sortie."</select>";
 			
 			$bdd->deconnexion();
@@ -227,6 +232,8 @@
 			if($row=$stmt->fetch()){
 				$idContenu=$row['idContenu'];
 				
+				if(is_object($stmt)){$stmt->closeCursor();}
+				
 				$requete2="DELETE FROM lien WHERE idLien=:idLien ;";
 				$requete3="DELETE FROM contenuPage WHERE idContenu=:idContenu ;";
 				$requete4="DELETE FROM contenuPage WHERE idContenu IN (SELECT idContenu FROM lien WHERE lienParent=:idLien) ;";
@@ -245,9 +252,13 @@
 				
 				
 				$stmt2->execute();
+				if(is_object($stmt2)){$stmt2->closeCursor();}
 				$stmt3->execute();
+				if(is_object($stmt3)){$stmt3->closeCursor();}
 				$stmt4->execute();
+				if(is_object($stmt4)){$stmt4->closeCursor();}
 				$stmt5->execute();
+				if(is_object($stmt5)){$stmt5->closeCursor();}
 				
 				$retour="1";
 			}
@@ -275,7 +286,8 @@
 			
 			if($row=$stmt->fetch()){
 				$rep="3";
-			}else{			
+			}else{
+				if(is_object($stmt)){$stmt->closeCursor();}
 				//pas de contenu?
 				if((!isset($contenu)) || $contenu==""){
 					$rep="4";
@@ -289,6 +301,7 @@
 						$stmt2 = $bdd->getConnexion()->prepare($requete2);
 						$stmt2->bindValue(':contenu', $contenu, PDO::PARAM_STR);
 						$stmt2->execute();
+						if(is_object($stmt2)){$stmt2->closeCursor();}
 						
 						//récupération de l'id du contenu					
 						$requete3="SELECT idContenu FROM contenuPage WHERE contenu=:contenu ;";
@@ -296,8 +309,9 @@
 						$stmt3->bindValue(':contenu', $contenu, PDO::PARAM_STR);
 						$stmt3->execute();
 						
-						if($row2=$stmt3->fetch()){
-							$id=$row2['idContenu'];
+						if($row3=$stmt3->fetch()){
+							$id=$row3['idContenu'];
+							if(is_object($stmt3)){$stmt3->closeCursor();}
 							
 							//insertion dans la table lien
 							if($lienParent==null || $lienParent=="" || $lienParent=="null"){			
@@ -312,6 +326,8 @@
 							$stmt4->bindValue(':id', $id, PDO::PARAM_STR);
 							$stmt4->bindValue(':tags', $tag, PDO::PARAM_STR);
 							$stmt4->execute();
+							
+							if(is_object($stmt4)){$stmt4->closeCursor();}
 						}else{
 							$rep="5";echo "la";
 						}
@@ -346,7 +362,7 @@
 						
 				if($row=$stmt->fetch()){
 					$id=$row['idContenu'];
-					
+					if(is_object($stmt)){$stmt->closeCursor();}
 					//insertion dans la table du nouveau contenu
 					$requete2="UPDATE lien SET label=:label, tags=:tags WHERE idLien=:idLien ;";
 					$stmt2 = $bdd->getConnexion()->prepare($requete2);
@@ -356,6 +372,7 @@
 					$stmt2->bindValue(':idLien', $idLien, PDO::PARAM_STR);
 					
 					$stmt2->execute();
+					if(is_object($stmt2)){$stmt2->closeCursor();}
 					
 					$requete3="UPDATE contenuPage SET contenu=:contenu WHERE idContenu=:id ;";
 					$stmt3 = $bdd->getConnexion()->prepare($requete3);
@@ -364,6 +381,7 @@
 					$stmt3->bindValue(':id', $id, PDO::PARAM_STR);
 					
 					$stmt3->execute();
+					if(is_object($stmt3)){$stmt3->closeCursor();}
 				}else{
 					$rep="7";
 				}
@@ -399,6 +417,7 @@
 			while ($row=$stmt->fetch()){
 				$sortie=$sortie.'<tr><td><a href="'.$row['chemin'].'">'.$row['nom'].'</a></td><td><input type="checkbox" name="'.$row['idFic'].'" id="'.$row['idFic'].'" /></td></tr>';
 			}
+			if(is_object($stmt)){$stmt->closeCursor();}
 		}
 		catch(PDOException $e){
 			$bdd->deconnexion();
@@ -422,6 +441,7 @@
 			$stmt->bindValue(':name', $name, PDO::PARAM_STR);
 			$stmt->bindValue(':path', $path, PDO::PARAM_STR);
 			$stmt->execute();
+			if(is_object($stmt)){$stmt->closeCursor();}
 		}
 		catch(PDOException $e){
 			$bdd->deconnexion();
@@ -440,17 +460,25 @@
 			$stmt = $bdd->getConnexion()->prepare($requete);
 			$stmt->execute();
 			
+			$haveToBeDeleted = array();
+			
 			while ($row=$stmt->fetch()){
 				if(isset($_POST[$row['idFic']]) && $_POST[$row['idFic']]=="on"){
 					//on supprime
 					unlink($row['chemin']);
-					$requete2="DELETE FROM fichiers WHERE idFic=:idFic ;";
-					$stmt2 = $bdd->getConnexion()->prepare($requete2);
-					$stmt2->bindValue(':idFic', $row['idFic'], PDO::PARAM_STR);
-					$stmt2->execute();
-					$retour=true;
+					$haveToBeDeleted[]=$row['idFic'];
 				}
 			}
+			if(is_object($stmt)){$stmt->closeCursor();}
+			
+			foreach($haveToBeDeleted as $id){
+				$requete2="DELETE FROM fichiers WHERE idFic=:idFic ;";
+				$stmt2 = $bdd->getConnexion()->prepare($requete2);
+				$stmt2->bindValue(':idFic', $id, PDO::PARAM_STR);
+				$stmt2->execute();
+				$retour=true;
+			}
+			if(is_object($stmt2)){$stmt2->closeCursor();}
 		}
 		catch(PDOException $e){
 			$bdd->deconnexion();
