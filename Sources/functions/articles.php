@@ -53,23 +53,23 @@ class Article{
 	public function add(){
 					
 		//pas de contenu?
-		if($contenu==null || $contenu==""){
+		if($this->contenu==null || $this->contenu==""){
 			return "4";
 		}
 		
 		$bdd=new BddConnector();
-		//insertion du contenu
+		//insertion du this->contenu
 		$requete="INSERT INTO contenuPage (contenu) VALUES (:contenu);";
 		try{
 			$stmt = $bdd->getConnexion()->prepare($requete);
-			$stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+			$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
 			$stmt->execute(); 				
 				
 			//récupération de l'id du contenu		
 			$requete="SELECT idContenu FROM contenuPage WHERE contenu=:contenu;";
 			
 			$stmt = $bdd->getConnexion()->prepare($requete);
-			$stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+			$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
 			$stmt->execute(); 		
 			$row=$stmt->fetch();
 			$bdd->deconnexion();
