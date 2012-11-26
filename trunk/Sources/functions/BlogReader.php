@@ -76,7 +76,7 @@ class BlogReader{
 				
 				$i++;
 			}
-			
+			if(is_object($stmt)){$stmt->closeCursor();}
 			$bdd->deconnexion();		
 		}
 		catch(PDOException $e){
@@ -100,6 +100,7 @@ class BlogReader{
 			if($row=$stmt->fetch()){
 				$retour=true;
 			}
+			if(is_object($stmt)){$stmt->closeCursor();}
 			$bdd->deconnexion();		
 		}
 		catch(PDOException $e){
@@ -123,6 +124,7 @@ class BlogReader{
 			if($row=$stmt->fetch()){
 				$retour=true;
 			}
+			if(is_object($stmt)){$stmt->closeCursor();}
 			$bdd->deconnexion();		
 		}
 		catch(PDOException $e){

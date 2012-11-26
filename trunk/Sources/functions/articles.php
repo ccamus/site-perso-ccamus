@@ -26,6 +26,7 @@ class Article{
 				$stmt->bindValue(':idArt', $id, PDO::PARAM_STR);
 				$stmt->execute(); 
 				$row=$stmt->fetch();
+				if(is_object($stmt)){$stmt->closeCursor();}
 				$bdd->deconnexion();
 				
 				if(!isset($row['contenu'])){
@@ -64,7 +65,7 @@ class Article{
 			$stmt = $bdd->getConnexion()->prepare($requete);
 			$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
 			$stmt->execute(); 				
-				
+			if(is_object($stmt)){$stmt->closeCursor();}
 			//récupération de l'id du contenu		
 			$requete="SELECT idContenu FROM contenuPage WHERE contenu=:contenu;";
 			
@@ -72,6 +73,7 @@ class Article{
 			$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
 			$stmt->execute(); 		
 			$row=$stmt->fetch();
+			if(is_object($stmt)){$stmt->closeCursor();}
 			$bdd->deconnexion();
 
 			if(!isset($row['idContenu'])){
@@ -89,7 +91,7 @@ class Article{
 			$stmt->bindValue(':tags', $this->tags, PDO::PARAM_STR);
 			$stmt->bindValue(':idContenu', $id, PDO::PARAM_STR);
 			$stmt->execute();
-			
+			if(is_object($stmt)){$stmt->closeCursor();}
 			//récupération de l'id du contenu	
 			$requete="SELECT idArticle FROM article WHERE idContenu=:id;";
 			
@@ -97,6 +99,7 @@ class Article{
 			$stmt->bindValue(':id', $id, PDO::PARAM_STR);
 			$stmt->execute(); 		
 			$row=$stmt->fetch();
+			if(is_object($stmt)){$stmt->closeCursor();}
 			$bdd->deconnexion();
 
 			if(!isset($row['idArticle'])){
@@ -138,8 +141,11 @@ class Article{
 				$stmt4->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
 				
 				$stmt2->execute(); 	
+				if(is_object($stmt2)){$stmt2->closeCursor();}
 				$stmt3->execute(); 	
+				if(is_object($stmt3)){$stmt3->closeCursor();}
 				$stmt4->execute(); 	
+				if(is_object($stmt4)){$stmt4->closeCursor();}
 								
 			}
 			catch(PDOException $e){
@@ -169,6 +175,7 @@ class Article{
 				$stmt->execute(); 		
 				
 				if($row=$stmt->fetch()){
+					if(is_object($stmt)){$stmt->closeCursor();}
 					$idContenu=$row['idContenu'];
 					
 					//insertion dans la table du nouveau contenu
@@ -178,13 +185,15 @@ class Article{
 					$stmt2->bindValue(':tags', $this->tags, PDO::PARAM_STR);
 					$stmt2->bindValue(':id', $this->idArticle, PDO::PARAM_STR);
 					$stmt2->execute();
+					if(is_object($stmt2)){$stmt2->closeCursor();}
 					
 					//insertion dans la table du nouveau contenu
 					$requete3="UPDATE contenuPage SET contenu=:contenu WHERE idContenu=:id ;";
 					$stmt3 = $bdd->getConnexion()->prepare($requete3);
 					$stmt3->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
 					$stmt3->bindValue(':id', $idContenu, PDO::PARAM_STR);
-					$stmt3->execute();					
+					$stmt3->execute();		
+					if(is_object($stmt3)){$stmt3->closeCursor();}
 				}else{
 					return "39";
 				}				
@@ -211,7 +220,7 @@ class Article{
 			$stmt->bindValue(':id', $idArticle, PDO::PARAM_STR);
 			$stmt->execute(); 	
 			$row=$stmt->fetch();	
-			
+			if(is_object($stmt)){$stmt->closeCursor();}
 			if(isset($row['idContenu'])){
 				$retour=$row['idContenu'];
 			}			
@@ -292,6 +301,7 @@ function listArticlesForModify(){
 		while($row=$stmt->fetch()){
 			$sortie=$sortie."<option value=".$row['idArticle'].">".$row['titre']."</option>";
 		}		
+		if(is_object($stmt)){$stmt->closeCursor();}
 		$bdd->deconnexion();		
 	}
 	catch(PDOException $e){

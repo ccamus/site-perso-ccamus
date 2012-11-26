@@ -33,7 +33,9 @@ class Commentaire{
 			
 			if(!($row=$stmtVerif->fetch())){
 				$rep="32";
-			}else{		
+				if(is_object($stmtVerif)){$stmtVerif->closeCursor();}
+			}else{
+				if(is_object($stmtVerif)){$stmtVerif->closeCursor();}
 				$requete="INSERT INTO commentaire (dateComm, commentateur, commentaire, idArticle)
 					VALUES (:dateComm, :commentateur, :commentaire, :idArticle);";
 			
@@ -43,6 +45,7 @@ class Commentaire{
 				$stmt->bindValue(':commentaire', $this->commentaire, PDO::PARAM_STR);
 				$stmt->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
 				$stmt->execute(); 	
+				if(is_object($stmt)){$stmt->closeCursor();}
 				
 				$requete2="select idCommentaire from commentaire
 					WHERE dateComm=:dateComm
@@ -62,6 +65,7 @@ class Commentaire{
 				}else{
 					$this->idCommentaire=$row['idCommentaire'];
 				}
+				if(is_object($stmt2)){$stmt2->closeCursor();}
 			}
 		}
 		catch(PDOException $e){
@@ -77,10 +81,11 @@ class Commentaire{
 		
 		$bdd=new BddConnector();
 		try{	
-		$requete="DELETE FROM commentaire WHERE idCommentaire=:idCommentaire;";
-		$stmt = $bdd->getConnexion()->prepare($requete);
-		$stmt->bindValue(':idCommentaire', $this->idCommentaire, PDO::PARAM_STR);
-		$stmt->execute();			
+			$requete="DELETE FROM commentaire WHERE idCommentaire=:idCommentaire;";
+			$stmt = $bdd->getConnexion()->prepare($requete);
+			$stmt->bindValue(':idCommentaire', $this->idCommentaire, PDO::PARAM_STR);
+			$stmt->execute();
+			if(is_object($stmt)){$stmt->closeCursor();}			
 		}
 		catch(PDOException $e){
 			$bdd->deconnexion();
@@ -150,7 +155,9 @@ function getCommentaireByArticleId($idArticle){
 		
 		if(!($row=$stmtVerif->fetch())){
 			$rep="32";
+			if(is_object($stmtVerif)){$stmtVerif->closeCursor();}
 		}else{
+			if(is_object($stmtVerif)){$stmtVerif->closeCursor();}
 			$requete="select idCommentaire, dateComm, commentateur, commentaire
 					from commentaire 
 					where idArticle=:idArticle";
@@ -166,6 +173,7 @@ function getCommentaireByArticleId($idArticle){
 				$commentaire->setDateComm($row['dateComm']);
 				$arrayRetour[]=$commentaire;
 			}
+			if(is_object($stmt)){$stmt->closeCursor();}
 		}
 	}
 	catch(PDOException $e){
@@ -198,7 +206,9 @@ function countCommentaireByArticle($idArticle){
 		
 		if(!($row=$stmtVerif->fetch())){
 			$rep="";
+			if(is_object($stmtVerif)){$stmtVerif->closeCursor();}
 		}else{
+			if(is_object($stmtVerif)){$stmtVerif->closeCursor();}
 			$requete="select count(idCommentaire) as c
 					from commentaire 
 					where idArticle=:idArticle";
@@ -209,6 +219,7 @@ function countCommentaireByArticle($idArticle){
 			if($row=$stmt->fetch()){
 				$rep=$row['c'];
 			}
+			if(is_object($stmt)){$stmt->closeCursor();}
 		}
 	}
 	catch(PDOException $e){
