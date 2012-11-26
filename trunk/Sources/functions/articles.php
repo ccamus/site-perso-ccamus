@@ -51,8 +51,6 @@ class Article{
 	
 	//Enregistre un article en base
 	public function add(){
-				
-		$contenu=str_replace("\n",'<br/>',$this->contenu);
 					
 		//pas de contenu?
 		if($contenu==null || $contenu==""){
@@ -162,17 +160,34 @@ class Article{
 		}else{
 			
 			$bdd=new BddConnector();
-		
-			$contenu=str_replace("\n",'<br/>',$this->contenu);
 			try{
-				//insertion dans la table du nouveau contenu
-				$requete="UPDATE contenuPage, article SET contenuPage.contenu=:contenu, article.titre=:titre, article.tags=:tags WHERE idArticle=:id AND contenuPage.idContenu=article.idContenu;";
+				//récupération de l'idContenu
+				$requete="SELECT idContenu FROM article WHERE idArticle=:id;";
+			
 				$stmt = $bdd->getConnexion()->prepare($requete);
-				$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
-				$stmt->bindValue(':titre', $this->titre, PDO::PARAM_STR);
-				$stmt->bindValue(':tags', $this->tags, PDO::PARAM_STR);
 				$stmt->bindValue(':id', $this->idArticle, PDO::PARAM_STR);
-				$stmt->execute(); 	
+				$stmt->execute(); 		
+				
+				if($row=$stmt->fetch()){
+					$idContenu=$row['idContenu'];
+					
+					//insertion dans la table du nouveau contenu
+					$requete2="UPDATE article SET titre=:titre, tags=:tags WHERE idArticle=:id ;";
+					$stmt2 = $bdd->getConnexion()->prepare($requete2);
+					$stmt2->bindValue(':titre', $this->titre, PDO::PARAM_STR);
+					$stmt2->bindValue(':tags', $this->tags, PDO::PARAM_STR);
+					$stmt2->bindValue(':id', $this->idArticle, PDO::PARAM_STR);
+					$stmt2->execute();
+					
+					//insertion dans la table du nouveau contenu
+					$requete3="UPDATE contenuPage SET contenu=:contenu WHERE idContenu=:id ;";
+					$stmt3 = $bdd->getConnexion()->prepare($requete3);
+					$stmt3->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
+					$stmt3->bindValue(':id', $idContenu, PDO::PARAM_STR);
+					$stmt3->execute();					
+				}else{
+					return "39";
+				}				
 			}
 			catch(PDOException $e){
 				$bdd->deconnexion();
@@ -230,6 +245,7 @@ class Article{
 	}
 	
 	public function setContenu($contenu){
+		$contenu=str_replace("\n",'<br/>',$contenu);
 		$this->contenu=$contenu;
 	}
 	

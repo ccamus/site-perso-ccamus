@@ -348,15 +348,22 @@
 					$id=$row['idContenu'];
 					
 					//insertion dans la table du nouveau contenu
-					$requete2="UPDATE contenuPage, lien SET contenuPage.contenu=:contenu, lien.label=:label, lien.tags=:tags WHERE contenuPage.idContenu=:id AND contenuPage.idContenu=lien.idContenu ;";
-					$stmt = $bdd->getConnexion()->prepare($requete2);
+					$requete2="UPDATE lien SET label=:label, tags=:tags WHERE idLien=:idLien ;";
+					$stmt2 = $bdd->getConnexion()->prepare($requete2);
 					
-					$stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
-					$stmt->bindValue(':label', $label, PDO::PARAM_STR);
-					$stmt->bindValue(':tags', $tags, PDO::PARAM_STR);
-					$stmt->bindValue(':id', $id, PDO::PARAM_STR);
+					$stmt2->bindValue(':label', $label, PDO::PARAM_STR);
+					$stmt2->bindValue(':tags', $tags, PDO::PARAM_STR);
+					$stmt2->bindValue(':idLien', $idLien, PDO::PARAM_STR);
 					
-					$stmt->execute();
+					$stmt2->execute();
+					
+					$requete3="UPDATE contenuPage SET contenu=:contenu WHERE idContenu=:id ;";
+					$stmt3 = $bdd->getConnexion()->prepare($requete3);
+					
+					$stmt3->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+					$stmt3->bindValue(':id', $id, PDO::PARAM_STR);
+					
+					$stmt3->execute();
 				}else{
 					$rep="7";
 				}

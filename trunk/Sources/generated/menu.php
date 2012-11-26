@@ -28,8 +28,8 @@
 								</li><li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projets Part1<b class="caret"></b></a>
 										<ul class="dropdown-menu">
-<li><a href='index.php?page=14'>VoluntaryStudent</a></li>
 <li><a href='index.php?page=12'>WifTalk</a></li>
+<li><a href='index.php?page=14'>VoluntaryStudent</a></li>
 <li><a href='index.php?page=16'>FlickR</a></li>
 <li><a href='index.php?page=17'>Time Kill</a></li>
 <li><a href='index.php?page=18'>Jotunn</a></li>
@@ -48,9 +48,9 @@
 								</li><li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projets Part2<b class="caret"></b></a>
 										<ul class="dropdown-menu">
-<li><a href='index.php?page=42'>Hibernate</a></li>
 <li><a href='index.php?page=39'>Raspberry PI - 1</a></li>
 <li><a href='index.php?page=41'>Raspberry PI - 2</a></li>
+<li><a href='index.php?page=42'>Hibernate</a></li>
 <li><a href='index.php?page=43'>Raspberry PI - 3</a></li>
 <li><a href='index.php?page=44'>Spring et Maven</a></li>
 </ul>
