@@ -56,4 +56,9 @@
 	$user_token="";
 	$user_secret="";
 	
+	/*
+	 *Activer ou non les commentaires
+	 */
+	$commActifs=true;
+	
 ?>
