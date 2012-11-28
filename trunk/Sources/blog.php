@@ -24,11 +24,15 @@
 	}
 
 	foreach($arrayArticles as $article){
+		$contenu=$article->getContenu();
 		echo '<div class="row"><div class="span1"></div>';
 		echo '<div class="span10"><div class="well">';
 		echo '<p class="pull-right"><i class="icon-calendar"></i> <small>'.$article->getDate().'</small></p>';
 		echo '<a href="visuArticle.php?art='.$article->getIdArticle().'"><h2>'.$article->getTitre().'</h2></a>';
-		echo substr(stripslashes($article->getContenu()),0,700).'...<span class="label label-default"><a href="visuArticle.php?art='.$article->getIdArticle().'">Lire la suite</a></span>';
+		echo substr($contenu,0,700);
+		if(strlen($contenu)>=700){	
+			echo '...<span class="label label-default"><a href="visuArticle.php?art='.$article->getIdArticle().'">Lire la suite</a></span>';
+		}
 		$nb=$article->getCountCommentaires();
 		echo '<br/><small><a href="visuArticle.php?art='.$article->getIdArticle().'#com"><span class="badge badge-info">'.$nb.'</span> commentaire';
 		if($nb>1){echo "s";}

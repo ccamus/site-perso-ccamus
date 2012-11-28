@@ -250,7 +250,7 @@ class Article{
 	}
 	
 	public function getContenu(){
-		return $this->contenu;
+		return stripslashes($this->contenu);
 	}
 	
 	public function setContenu($contenu){
