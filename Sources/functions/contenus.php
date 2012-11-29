@@ -160,13 +160,13 @@
 				}
 				if(is_object($stmt)){$stmt->closeCursor();}
 			}
-			$bdd->deconnexion();		
+			$bdd->deconnexion();	
 		}
 		catch(PDOException $e){
 			$rep="none";
 			$bdd->deconnexion();
 		}
-		
+		$rep['contenu']=stripslashes($rep['contenu']);
 		return $rep;
 	}
 
