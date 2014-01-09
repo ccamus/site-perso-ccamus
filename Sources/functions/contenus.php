@@ -444,6 +444,7 @@
 			if(is_object($stmt)){$stmt->closeCursor();}
 		}
 		catch(PDOException $e){
+			echo ($e);
 			$bdd->deconnexion();
 		}				
 		$bdd->deconnexion();
@@ -451,7 +452,7 @@
 		return $name;
 	}
 	
-	function deleteFiles($_POST){
+	function deleteFiles(){
 		$bdd=new BddConnector();
 		$retour=false;
 		
