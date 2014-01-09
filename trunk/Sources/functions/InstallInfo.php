@@ -11,7 +11,7 @@
 	 * En Prod : camus.charlie.sql.free.fr
 	 */
 	//$bddPlace='localhost';
-	$bddPlace='/home/pi/www/sqlite/test.sqlite3';
+	$bddPlace='/home/pi/www/devSitePerso/site-perso-ccamus/Sources/bdd/sqlite/bdd.sqlite3';
 	
 	//utilisateur de la base de données
 	$bddUser='camus.charlie';
@@ -33,7 +33,7 @@
 	 * En dev : http://192.168.0.10/Site_DEV
 	 * En prod : http://camus.charlie.free.fr
 	 */
-	$localisationServeur='http://rasbi.hd.free.fr/trunk/Sources';
+	$localisationServeur='http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources';
 	
 	/*
 	 * Endroit où sont stockés les fichiers chargés sur le site
