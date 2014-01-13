@@ -1,5 +1,7 @@
 <?php
 
+
+
 class BlogReader{
 	
 	private $lastDate;
@@ -16,6 +18,8 @@ class BlogReader{
 	}
 	
 	public function getEight($next){
+		include("InstallInfo.php");
+		
 		$bdd=new BddConnector();
 		$arrayRetour = array();
 		if(($next && $this->lastDate=="") || (!$next && $this->firstDate=="")){
@@ -29,7 +33,7 @@ class BlogReader{
 			from article, contenuPage
 			where article.idContenu=contenuPage.idContenu
 			order by dateArticle desc
-			limit 8 ;";
+			limit ".$nbArticlesParPage." ;";
 		}else{
 			if($next){//on va vers les plus vieux
 				$requete="select idArticle, titre, tags, dateArticle, contenu
@@ -37,14 +41,14 @@ class BlogReader{
 				where article.idContenu=contenuPage.idContenu
 					and dateArticle < :Date 
 				order by dateArticle desc
-				limit 8 ;";
+				limit ".$nbArticlesParPage." ;";
 			}else{//on va vers les plus récents
 				$requete="select idArticle, titre, tags, dateArticle, contenu
 				from (select idArticle, titre, tags, dateArticle, contenu
 					from article, contenuPage
 					where article.idContenu=contenuPage.idContenu
 						and dateArticle > :Date 
-					order by dateArticle asc limit 8) as t
+					order by dateArticle asc limit ".$nbArticlesParPage.") as t
 				order by dateArticle desc ;";
 			}
 		}

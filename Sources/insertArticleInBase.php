@@ -1,6 +1,10 @@
 <?php
 	session_start();
-	include("functions.php");
+	include('functions/bdd.php');
+	include('functions/articles.php');
+	include('functions/other.php');
+	include('functions/contenus.php');
+	include('functions/apiComm.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut ajouter du contenu, le peut il?

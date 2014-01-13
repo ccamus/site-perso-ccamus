@@ -1,6 +1,10 @@
 <?php
 	session_start();
-	include("functions.php");
+	
+	include('functions/bdd.php');
+	include('functions/articles.php');
+	include('functions/other.php');
+	include('functions/contenus.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut changer du contenu, le peut il?
@@ -8,7 +12,6 @@
 			//il existe et est authorisé
 			if(isset($_SESSION['articles']) && $_SESSION['articles']!="" && isset($_POST['contenu']) && $_POST['contenu']!=""){
 				//On change!
-				//$rep=changeContenu($_SESSION['lien'],$_POST['titreArticle'],$_POST['tag'],$_POST['contenu']);
 				$article=new Article();
 				$article->setIdArticle($_SESSION['articles']);
 				$article->setContenu($_POST['contenu']);

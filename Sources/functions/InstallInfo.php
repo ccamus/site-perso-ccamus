@@ -61,4 +61,9 @@
 	 */
 	$commActifs=true;
 	
+	/*
+	 * Nombre d'articles par page
+	 */
+	$nbArticlesParPage="5";
+	
 ?>

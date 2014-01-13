@@ -1,7 +1,13 @@
 <?php
 
 	session_start();
-	include("functions.php");
+	
+	include('functions/bdd.php');
+	include('functions/other.php');
+	include('functions/contenus.php');
+	include('functions/affichage.php');
+	include('functions/articles.php');
+	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		if(isExist($_SESSION['userName'],$_SESSION['pwd'])){
 			//il existe et est authorisé
