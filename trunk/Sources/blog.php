@@ -1,4 +1,10 @@
 <?php	
+	include("functions/bdd.php");
+	include('functions/other.php');
+	include("functions/articles.php");
+	include("functions/commentaire.php");
+	include('functions/BlogReader.php');
+	
 	$next=true;
 	if(isset($_GET['to']) && $_GET['to']=='prev'){
 		$next=false;

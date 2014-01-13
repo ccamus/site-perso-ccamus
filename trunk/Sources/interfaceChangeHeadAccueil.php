@@ -1,6 +1,10 @@
 <?php
 	session_start();
-	include("functions.php");
+	
+	include('functions/bdd.php');
+	include('functions/affichage.php');
+	include('functions/other.php');
+	include('functions/contenus.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut changer du contenu, le peut il?

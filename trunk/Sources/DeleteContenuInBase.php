@@ -1,7 +1,12 @@
 <?php
 
 	session_start();
-	include("functions.php");
+	
+	include('functions/bdd.php');
+	include('functions/affichage.php');
+	include('functions/other.php');
+	include('functions/contenus.php');
+	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		if(isExist($_SESSION['userName'],$_SESSION['pwd'])){
 			if(isset($_POST['liens'])){

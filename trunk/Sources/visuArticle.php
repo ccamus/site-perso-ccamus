@@ -1,8 +1,13 @@
 <?php
 	session_start();
-	include("functions.php");
 	
-	
+	include("functions/bdd.php");
+	include('functions/affichage.php');
+	include('functions/other.php');
+	include('functions/articles.php');
+	include('functions/commentaire.php');
+	include('functions/contenus.php');
+		
 	if(isset($_GET['art']) && is_numeric($_GET['art'])){
 		
 		$article=new Article();
@@ -77,17 +82,8 @@
 					</div>';
 				
 				//reCaptcha
-				require_once('libraries/recaptchalib.php');
 				include('functions/InstallInfo.php');
 				
-				$error = null;
-				echo '<div class="form-group">
-						<label class="col-sm-2 control-label" for=""></label>
-						<div class="col-sm-10">
-							'.recaptcha_get_html($publicKeyReCaptcha, $error).'
-						</div>
-					</div>';
-					
 				echo '<br/><div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn btn-default">Envoyer !</button>
@@ -112,7 +108,7 @@
 				include('functions/messages.php');
 				if($msgs[$_GET['message']]!=""){
 					if($isError[$_GET['message']]=="1"){
-						echo '<div class="alert alert-error">
+						echo '<div class="alert alert-danger">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<h4>Erreur!</h4>'.$msgs[$_GET['message']].'</div>';
 					}else{

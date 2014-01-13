@@ -43,7 +43,7 @@
 			include('messages.php');
 			if($msgs[$_GET['message']]!=""){
 				if($isError[$_GET['message']]=="1"){
-					echo '<div class="alert alert-error">
+					echo '<div class="alert alert-danger">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h4>Erreur!</h4>'.$msgs[$_GET['message']].'</div>';
 				}else{
