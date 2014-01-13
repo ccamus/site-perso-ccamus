@@ -1,5 +1,6 @@
 body {
 	padding-top: 60px;
+	font-size: 13px;
 }
 
 .footer {
@@ -11,4 +12,36 @@ body {
 
 p{
 	text-align: justify;
+}
+
+a{
+	color:#222222;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+.panel{
+	border-radius:4px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.img-rounded{
+	border-radius:4px;
+}
+
+.container .jumbotron{
+	border-radius:4px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+span.label.label-primary > a {
+	color:#FFFFFF;
+}
+
+span.label.label-default > a {
+	color:#FFFFFF;
+}
+
+.label {
+	border-radius:4px;
 }

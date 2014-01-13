@@ -30,34 +30,35 @@
 			enTete(null,$siteName." - Interface d'administration");
 			echo '<div class="container">			
 			<div class="row">
-				<div class="span6">
+				<div class="col-md-6">
 									
-					<form class="form-horizontal" method="post" action="adminInterface.php">
-						<div class="controls">
+					<form class="form-horizontal" role="form" method="post" action="adminInterface.php">
+						<div class="form-group">
 							<legend>Connexion administrateur</legend>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="pseudo">Nom de connexion</label>
-							<div class="controls">
-								<input type="text" name="pseudo" id="pseudo" placeholder="Nom de connexion">
+							
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="pseudo">Nom de connexion</label>
+								<div class="col-sm-10">
+									<input type="text" name="pseudo" id="pseudo" placeholder="Nom de connexion" class="form-control">
+								</div>
 							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="pass">Mot de passe</label>
-							<div class="controls">
-								<input type="password" name="pass" id="pass" placeholder="Mot de passe">
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="pass">Mot de passe</label>
+								<div class="col-sm-10">
+									<input type="password" name="pass" id="pass" placeholder="Mot de passe" class="form-control">
+								</div>
 							</div>
-						</div>
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn">Envoyer !</button>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+								  <button type="submit" class="btn btn-default">Connexion</button>
+								</div>
 							</div>
 						</div>
 					</form>
 				
 				</div>
 				
-				<div class="span6">
+				<div class="col-md-6">
 					
 					<p>
 						<h2>Administration et gestion de contenus</h2>
@@ -75,15 +76,15 @@
 		return '<div class="container">			
 					<h1>Interface d\'administration</h1><br/><br/><br/>
 					<div class="row">
-						<div class="span6">
+						<div class="col-md-6">
 							
 							<div class="controls">
 								<legend>Gestion des articles</legend>
 							</div>
 							
-							<i class="icon-pencil"></i> <a href="ajoutArticle.php">Ajouter un article</a><br/>
-							<i class="icon-folder-open"></i> <a href="modifyArticle.php">Modifier un article</a><br/>
-							<i class="icon-trash"></i> <a href="deleteArticle.php">Supprimer un article</a><br/>
+							<span class="glyphicon glyphicon-pencil"></span><a href="ajoutArticle.php">Ajouter un article</a><br/>
+							<span class="glyphicon glyphicon-folder-open"></span> <a href="modifyArticle.php">Modifier un article</a><br/>
+							<span class="glyphicon glyphicon-trash"></span></i> <a href="deleteArticle.php">Supprimer un article</a><br/>
 							
 							<div class="controls">
 								<legend>Gestion des Commentaires</legend>
@@ -93,25 +94,25 @@
 							
 						</div>
 								
-						<div class="span6">
+						<div class="col-md-6">
 							
 							<div class="controls">
 								<legend>Gestion du contenu</legend>
 							</div>
-							<i class="icon-pencil"></i> <a href="ajouContenu.php">Ajouter du Contenu</a><br/>
-							<i class="icon-folder-open"></i> <a href="interfaceChangeContenu.php">Changer du Contenu</a><br/>
-							<i class="icon-trash"></i> <a href="deleteContenu.php">Supprimer du Contenu</a><br/>
+							<span class="glyphicon glyphicon-pencil"></span> <a href="ajouContenu.php">Ajouter du Contenu</a><br/>
+							<span class="glyphicon glyphicon-folder-open"></span> <a href="interfaceChangeContenu.php">Changer du Contenu</a><br/>
+							<span class="glyphicon glyphicon-trash"></span> <a href="deleteContenu.php">Supprimer du Contenu</a><br/>
 							<br/><br/>
-							<i class="icon-upload"></i> <a href="addFile.php">Envoyer un fichier sur le serveur</a><br/>
-							<i class="icon-trash"></i> <a href="affiFile.php">Voir et/ou supprimer des fichiers sur le serveur</a><br/>
+							<span class="glyphicon glyphicon-upload"></span> <a href="addFile.php">Envoyer un fichier sur le serveur</a><br/>
+							<span class="glyphicon glyphicon-trash"></span> <a href="affiFile.php">Voir et/ou supprimer des fichiers sur le serveur</a><br/>
 							<br/><br/>
-							<i class="icon-picture"></i> <a href="interfaceChangeCSS.php">Modifier les styles personnalisés</a><br/>
-							<i class="icon-picture"></i> <a href="interfaceChangeHeadAccueil.php">Modifier le header d\'accueil</a><br/>
+							<span class="glyphicon glyphicon-picture"></span> <a href="interfaceChangeCSS.php">Modifier les styles personnalisés</a><br/>
+							<span class="glyphicon glyphicon-picture"></span> <a href="interfaceChangeHeadAccueil.php">Modifier le header d\'accueil</a><br/>
 							
 						</div>
 					</div>
 					<br/><br/>
-					<div align="center"><a href="deco.php" class="btn btn-large btn-info">Se déconnecter</a></div>
+					<div align="center"><a href="deco.php" class="btn btn-large btn-danger">Se déconnecter</a></div>
 				</div>';
 	}
 	

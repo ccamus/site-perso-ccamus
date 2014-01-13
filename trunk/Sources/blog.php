@@ -25,22 +25,21 @@
 
 	foreach($arrayArticles as $article){
 		$contenu=$article->getContenu();
-		echo '<div class="row"><div class="span1"></div>';
-		echo '<div class="span10"><div class="well">';
-		echo '<p class="pull-right"><i class="icon-calendar"></i> <small>'.$article->getDate().'</small></p>';
-		echo '<a href="visuArticle.php?art='.$article->getIdArticle().'"><h2>'.$article->getTitre().'</h2></a>';
+		echo '<div class="row"><div class="col-md-1"></div><div class="col-md-10">';
+		echo '<div class="panel panel-primary">';
+		echo '<div class="panel-heading"><h3 class="panel-title"><a href="visuArticle.php?art='.$article->getIdArticle().'">'.$article->getTitre().'</a></h3></div>';
+		echo '<div class="panel-body"><p class="pull-right"><span class="glyphicon glyphicon-calendar"></span> <small>'.$article->getDate().'</small></p><br/>';
 		echo substr($contenu,0,700);
 		if(strlen($contenu)>=700){	
-			echo '...<span class="label label-default"><a href="visuArticle.php?art='.$article->getIdArticle().'">Lire la suite</a></span>';
+			echo '...<span class="label label-primary"><a href="visuArticle.php?art='.$article->getIdArticle().'">Lire la suite</a></span>';
 		}
 		$nb=$article->getCountCommentaires();
 		echo '<br/><small><a href="visuArticle.php?art='.$article->getIdArticle().'#com"><span class="badge badge-info">'.$nb.'</span> commentaire';
 		if($nb>1){echo "s";}
 		echo '</a></small>';
-		echo '<p class="pull-right"><i class="icon-tags"></i> <small>'.$article->getTags().'</small></p><br/>';
+		echo '<p class="pull-right"><span class="glyphicon glyphicon-tag"></span></i> <small>'.$article->getTags().'</small></p></div>';
 		echo '</div></div>';
-		echo '<div class="span1"></div></div>
-			';
+		echo '<div class="col-md-1"></div></div>';
 	}
 	
 	echo '<ul class="pager"><li class="previous';

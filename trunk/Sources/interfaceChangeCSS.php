@@ -19,34 +19,30 @@
 				enTete(null,$siteName." - Modification du css");
 				
 				//on cherche à modifier le contenu
-				echo '<form class="form-horizontal" method="post" action="interfaceChangeCSS.php">
-						<div class="controls">
-							<legend>Modification des style spéciaux</legend>
-						</div>
+				echo '<form class="form-horizontal" role="form" method="post" action="interfaceChangeCSS.php">
+						<legend>Modification des style spéciaux</legend>
 						
 						
-						<div class="control-group">
-							<label class="control-label" for="contenu">Nouveau CSS :</label>
-							<div class="controls">
-								<textarea name="contenu" id="contenu" rows="20" class="span6">'.getCss().'</textarea>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="contenu">Nouveau CSS :</label>
+							<div class="col-sm-10">
+								<textarea name="contenu" id="contenu" rows="20" class="form-control">'.getCss().'</textarea>
 							</div>
 						</div>
 						
 						
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn">Envoyer !</button>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-default">Envoyer !</button>
 							</div>
 						</div>
 					</form><br/><br/><br/><br/>
 				<p>
 						Ecrire les styles de la manière suivante :<br/>
-						<table class="table">
 							/* Définition du style */<br/>
 							#nomStyle {<br/>
 								données...<br/>
-							}
-						</table>
+							}<br/>
 						Si aucun commentaire est entré, il n\'apparaîtra pas dans les styles disponibles.
 					</p>';
 			}

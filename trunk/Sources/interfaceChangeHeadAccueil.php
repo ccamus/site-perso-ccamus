@@ -19,23 +19,20 @@
 				enTete(null,$siteName." - Changement de l\'en tête");
 				
 				//on cherche à modifier le contenu
-				echo '<form class="form-horizontal" method="post" action="interfaceChangeHeadAccueil.php">
-						<div class="controls">
-							<legend>Modification du header d\'accueil</legend>
-						</div>
+				echo '<form class="form-horizontal" role="form" method="post" action="interfaceChangeHeadAccueil.php">
+						<legend>Modification du header d\'accueil</legend>						
 						
-						
-						<div class="control-group">
-							<label class="control-label" for="contenu">Nouveau header d\'accueil :</label>
-							<div class="controls">
-								<textarea name="contenu" id="contenu" rows="20" class="span6">'.getHeadAccueil().'</textarea>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="contenu">Nouveau header d\'accueil :</label>
+							<div class="col-sm-10">
+								<textarea name="contenu" id="contenu" rows="20" class="form-control">'.getHeadAccueil().'</textarea>
 							</div>
 						</div>
 						
 						
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn">Envoyer !</button>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-default">Envoyer !</button>
 							</div>
 						</div>
 					</form><br/><br/><br/><br/>';

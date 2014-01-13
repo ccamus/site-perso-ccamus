@@ -7,23 +7,20 @@
 			//il existe et est authorisé
 			include('functions/InstallInfo.php');
 			enTete(null,$siteName." - Suppression d'article");
-			echo '<form class="form-horizontal" method="post" action="DeleteArticleInBase.php">
-						<div class="controls">
-							<legend>Suppression d\'article</legend>
-						</div>
-						
-						
-						<div class="control-group">
-							<label class="control-label" for="articles">Titre de l\'article :</label>
-							<div class="controls">
+			echo '<form class="form-horizontal" role="form" method="post" action="DeleteArticleInBase.php">
+						<legend>Suppression d\'article</legend>
+												
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="articles">Titre de l\'article :</label>
+							<div class="col-sm-10">
 								'.listArticlesForModify().'
 							</div>
 						</div>
 						
 						
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn">Supprimer !</button>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-default">Supprimer !</button>
 							</div>
 						</div>
 					</form>';

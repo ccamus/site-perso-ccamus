@@ -15,36 +15,34 @@
 				$article=new Article();
 				$rep=$article->getArticleById($_POST['articles']);
 				if($rep==""){
-					echo '<form class="form-horizontal" method="post" action="modifyArticleInBase.php">
-							<div class="controls">
-								<legend>Modification d\'un article</legend>
-							</div>
+					echo '<form class="form-horizontal" role="form" method="post" action="modifyArticleInBase.php">
+							<legend>Modification d\'un article</legend>
 							
-							<div class="control-group">
-								<label class="control-label" for="titreArticle">Titre de l\'article :</label>
-								<div class="controls">
-									<input type="text" name="titreArticle" id="titreArticle" value="'.$article->getTitre().'">
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="titreArticle">Titre de l\'article :</label>
+								<div class="col-sm-10">
+									<input type="text" name="titreArticle" id="titreArticle" value="'.$article->getTitre().'" class="form-control">
 								</div>
 							</div>
 							
-							<div class="control-group">
-								<label class="control-label" for="tag">Tags :</label>
-								<div class="controls">
-									<input type="text" name="tag" id="tag" value="'.$article->getTags().'">
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="tag">Tags :</label>
+								<div class="col-sm-10">
+									<input type="text" name="tag" id="tag" value="'.$article->getTags().'" class="form-control">
 								</div>
 							</div>
 							
-							<div class="control-group">
-								<label class="control-label" for="contenu">Nouveau contenu :</label>
-								<div class="controls">
-									<textarea name="contenu" id="contenu" rows="20" class="span6">'.str_replace('<br/>',"\n",$article->getContenu()).'</textarea>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="contenu">Nouveau contenu :</label>
+								<div class="col-sm-10">
+									<textarea name="contenu" id="contenu" rows="20" class="form-control">'.str_replace('<br/>',"\n",$article->getContenu()).'</textarea>
 								</div>
 							</div>
 							
 							
-							<div class="control-group">
-								<div class="controls">
-									<button type="submit" class="btn">Envoyer !</button>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-default">Envoyer !</button>
 								</div>
 							</div>
 						</form><br/><br/><br/><br/>';
@@ -53,23 +51,21 @@
 					redirAccueil($rep);
 				}
 			}else{
-				echo '<form class="form-horizontal" method="post" action="modifyArticle.php">
-						<div class="controls">
-							<legend>Modification d\'un article</legend>
-						</div>
+				echo '<form class="form-horizontal" role="form" method="post" action="modifyArticle.php">
+						<legend>Modification d\'un article</legend>
 						
 						
-						<div class="control-group">
-							<label class="control-label" for="articles">Titre de l\'article :</label>
-							<div class="controls">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="articles">Titre de l\'article :</label>
+							<div class="col-sm-10">
 								'.listArticlesForModify().'
 							</div>
 						</div>
 						
 						
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn">Envoyer !</button>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-default">Envoyer !</button>
 							</div>
 						</div>
 					</form>';
