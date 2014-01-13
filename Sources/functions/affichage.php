@@ -13,9 +13,8 @@
     echo '<meta name="author" content="Charlie Camus">
 
     <!-- Le styles -->
-    <link href="libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" /> 
-    <link href="libraries/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="libraries/bootstrap/css/bootstrap.cosmo.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" />
 	<link rel="stylesheet" href="libraries/google-code-prettify/prettify.css" type="text/css" charset="UTF-8" /> 
 	<script type="text/javascript" src="libraries/google-code-prettify/prettify.js"></script>
 	<link rel="stylesheet" href="generated/stylePerso.css" type="text/css" charset="UTF-8" /> 
@@ -90,7 +89,7 @@
 		</div>
 	<footer class="footer">
       <div class="container">
-		<p class="pull-right"><span class="label"><a href="#">Haut de page</a></span></p>
+		<p class="pull-right"><span class="label label-default"><a href="#">Haut de page</a></span></p>
         <p>Site web entièrement réalisé par <a href="mailto:camus.charlie@gmail.com">Charlie Camus</a>.</p>
         <p>Style réalisé par <a href="http://twitter.com/twitter" target="_blank">@twitter</a> : <a href="http://twitter.github.com/bootstrap/index.html">Twitter Bootstrap</a> sous la <a href="http://www.apache.org/licenses/LICENSE-2.0">licence Apache V2.0</a>.</p>
         <p>Icones provenant de <a href="http://glyphicons.com">Glyphicons Free</a>, sous licence <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>

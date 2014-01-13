@@ -1,17 +1,18 @@
- <div class="navbar navbar-fixed-top">
-				<div class="navbar-inner">
-					<a class="brand" href="http://rasbi.hd.free.fr/trunk/Sources">@Charlie</a>
-					<div class="container">
+ <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
 	 
-						<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
-						 </button>
-						 
-						<div class="nav-collapse collapse">
-							<ul class="nav"><li class="dropdown">
+						</button>
+						
+						<a class="navbar-brand" href="http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources">@Charlie</a>
+					</div>
+						<div class="collapse navbar-collapse">
+							<ul class="nav navbar-nav"><li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Le site<b class="caret"></b></a>
 										<ul class="dropdown-menu">
 <li><a href='index.php?page=36'>Description</a></li>
@@ -43,7 +44,6 @@
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Détente<b class="caret"></b></a>
 										<ul class="dropdown-menu">
 <li><a href='index.php?page=26'>musique</a></li>
-<li><a href='index.php?page=27'>Récit de viking</a></li>
 </ul>
 								</li><li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projets Part2<b class="caret"></b></a>
@@ -61,4 +61,3 @@
 						</div>
 					</div>
 				</div>
-			</div>

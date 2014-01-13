@@ -13,16 +13,6 @@ h1 {
 	TEXT-DECORATION:underline;
 }
 
-a{
-	color:#222222;
-	text-decoration:none;
-	font-weight:bold;
-}
-
-a:hover {
-   color:#5a5757;
-}
-
 table{
 	font: 14px arial, sans-serif;
 }

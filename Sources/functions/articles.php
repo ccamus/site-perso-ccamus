@@ -290,7 +290,7 @@ class Article{
 function listArticlesForModify(){
 	$bdd=new BddConnector();
 	
-	$sortie="<select name='articles'>";
+	$sortie="<select name='articles' class='form-control'>";
 	
 	$requete="SELECT idArticle, titre FROM article ;";
 	

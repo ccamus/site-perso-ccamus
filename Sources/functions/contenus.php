@@ -65,20 +65,21 @@
 		$bdd=new BddConnector();
 		$requete="SELECT idLien, label FROM lien WHERE lienParent IS NULL ORDER BY idLien";
 		try{
-			$sortie=$sortie.' <div class="navbar navbar-fixed-top">
-				<div class="navbar-inner">
-					<a class="brand" href="'.$localisationServeur.'">@Charlie</a>
-					<div class="container">
+			$sortie=$sortie.' <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
 	 
-						<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
-						 </button>
-						 
-						<div class="nav-collapse collapse">
-							<ul class="nav">';
+						</button>
+						
+						<a class="navbar-brand" href="'.$localisationServeur.'">@Charlie</a>
+					</div>
+						<div class="collapse navbar-collapse">
+							<ul class="nav navbar-nav">';
 			$stmt = $bdd->getConnexion()->prepare($requete);
 			$stmt->execute(); 	
 			while ($row=$stmt->fetch()){
@@ -117,8 +118,7 @@
 			$sortie=$sortie."</ul>
 						</div>
 					</div>
-				</div>
-			</div>";
+				</div>";
 			//écriture dans le fichier
 			
 			
@@ -176,12 +176,12 @@
 		
 		$requete="SELECT idLien, label FROM lien WHERE lienParent IS NULL ORDER BY idLien";
 		try{
-			$sortie=$sortie."<option value='null'>Aucun</option>";
+			$sortie=$sortie."<option value='null' class='form-control'>Aucun</option>";
 			
 			$stmt = $bdd->getConnexion()->prepare($requete);
 			$stmt->execute(); 	
 			while ($row=$stmt->fetch()){
-				$sortie=$sortie."<option value=".$row['idLien'].">".$row['label']."</option>";
+				$sortie=$sortie."<option value=".$row['idLien']." class='form-control'>".$row['label']."</option>";
 			}
 			if(is_object($stmt)){$stmt->closeCursor();}
 			$sortie=$sortie."</select>";
@@ -204,7 +204,7 @@
 			$stmt->execute(); 
 			
 			while ($row=$stmt->fetch()){
-				$sortie=$sortie."<option value=".$row['idLien'].">".$row['label']."</option>";
+				$sortie=$sortie."<option value=".$row['idLien']." class='form-control'>".$row['label']."</option>";
 			}
 			if(is_object($stmt)){$stmt->closeCursor();}
 			$sortie=$sortie."</select>";

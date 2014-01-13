@@ -6,23 +6,21 @@
 		//il est connecté?
 		include('functions/InstallInfo.php');
 		enTete(null,$siteName." - Ajout de fichier");
-		echo '<form class="form-horizontal" method="post" action="saveFile.php" enctype="multipart/form-data">
-						<div class="controls">
-							<legend>Ajout de fichiers</legend>
-						</div>
+		echo '<form class="form-horizontal" role="form" method="post" action="saveFile.php" enctype="multipart/form-data">
+						<legend>Ajout de fichiers</legend>
 						
 						
-						<div class="control-group">
-							<label class="control-label">Sélectionnez le fichier : </label>
-							<div class="controls">
-								<INPUT type=hidden name="MAX_FILE_SIZE" value="104857600"/><INPUT type=file name="fichier"/>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Sélectionnez le fichier : </label>
+							<div class="col-sm-10">
+								<INPUT type=hidden name="MAX_FILE_SIZE" value="104857600" class="form-control"/><INPUT type=file name="fichier"/>
 							</div>
 						</div>
 						
 						
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn">Envoyer !</button>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-default">Envoyer !</button>
 							</div>
 						</div>
 					</form>';
