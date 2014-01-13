@@ -41,13 +41,6 @@
 	 */
 	$folderForFiles="donnes/";
 	
-	
-	/*
-	 * Clé publique et privé pour captcha
-	 */
-	$publicKeyReCaptcha="6Lcbw9gSAAAAAFKloYXuUVDV4zSc0My0ZqkWXnaa";
-	$privateKeyReCaptcha="6Lcbw9gSAAAAAN0y8vS2KjCWMxceMt2mwsR4xp76";
-	
 	/*
 	 * Données relatives à la connexion avec l'API tweeter
 	 */
