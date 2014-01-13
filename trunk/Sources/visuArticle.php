@@ -79,20 +79,31 @@
 				}
 				echo		'</textarea>
 						</div>
-					</div>';
-				
-				//reCaptcha
-				include('functions/InstallInfo.php');
-				
-				echo '<br/><div class="form-group">
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+						  <div class="checkbox">
+							<label id="checkBot" style="display:none">
+							  <input type="checkbox" name="checkBot" value="notBot"> Merci de cocher cette case afin de montrer que vous n\'&ecirc;tes pas un robot.</input>
+							</label>
+						  </div>
+						</div>
+					</div>
+					<input type="hidden" name="email" value="" /> 
+					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn btn-default">Envoyer !</button>
 						</div>
-					</div>';
-				echo '</form>';
-				
-				echo '</div></div>';			
-				echo '<div class="span2"></div></div></section>';
+					</div>
+					</form>
+					
+					</div></div>
+					<div class="span2"></div></div></section>
+					
+					<script type="text/javascript">
+						document.getElementById("checkBot").style.display="block";
+					</script>';
 				
 				//si le mec est pas logué, on détruit la session
 				if(!$isAdmin){
