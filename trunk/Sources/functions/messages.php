@@ -39,7 +39,7 @@ $msgs = array(
     "37" => "Erreur captcha.",
     "38" => "Erreur twitter, l'article a tout de même été correctement créé.",
     "39" => "Erreur de récupération du contenu.",
-    "40" => "Merci de cocher la case indiquant que vous n'êtes pas un robot.",
+    "40" => "Merci de cocher la case indiquant que vous n'êtes pas un robot. Si vous ne voyez pas de case, merci d'activer votre javascript.",
 );
 $isError = array(
     "1" => "0",

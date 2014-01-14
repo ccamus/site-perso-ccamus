@@ -43,7 +43,7 @@
 		echo '<br/><small><a href="visuArticle.php?art='.$article->getIdArticle().'#com"><span class="badge badge-info">'.$nb.'</span> commentaire';
 		if($nb>1){echo "s";}
 		echo '</a></small>';
-		echo '<p class="pull-right"><span class="glyphicon glyphicon-tag"></span></i> <small>'.$article->getTags().'</small></p></div>';
+		echo '<p class="pull-right"><span class="glyphicon glyphicon-tag"></span> <small>'.$article->getTags().'</small></p></div>';
 		echo '</div></div>';
 		echo '<div class="col-md-1"></div></div>';
 	}
@@ -52,14 +52,15 @@
 	if(!$reader->asPreview()){
 		echo ' disabled"><a href="#">&larr; Précédent</a></li>';
 	}else{
-		echo '"><a href="index.php?to=prev&dat='.$reader->getFirstDate().'">&larr; Précédent</a></li>';
+		echo '"><a href="index.php?to=prev&amp;dat='.$reader->getFirstDate().'">&larr; Précédent</a></li>';
 	}
 	echo '<li class="next';
 	if(!$reader->asNext()){
 		echo ' disabled"><a href="#">Suivant &rarr;</a></li>';
 	}else{
-		echo '"><a href="index.php?to=nex&dat='.$reader->getLastDate().'">Suivant &rarr;</a></li>';
+		echo '"><a href="index.php?to=nex&amp;dat='.$reader->getLastDate().'">Suivant &rarr;</a></li>';
 	}
+	echo '</ul>';
 	
 	
 ?>

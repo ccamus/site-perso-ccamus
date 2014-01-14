@@ -10,7 +10,7 @@
 			isset($_POST['commentaire']) ){
 			//il est bien passé par le formulaire d'ajout de comms
 			
-			if($_POST['checkBot']!="notBot" || $_POST['email']!="" ){
+			if(!isset($_POST['checkBot']) || $_POST['checkBot']!="notBot" || $_POST['email']!="" ){
 				// C'est un robot !
 				$_SESSION['nomCommentateur']=$_POST['commentateur'];
 				$_SESSION['commentaire']=$_POST['commentaire'];
