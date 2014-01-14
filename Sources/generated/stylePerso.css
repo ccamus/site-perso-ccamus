@@ -4,7 +4,7 @@ h1 {
 }
 
 /* Centrer un texte */
-#center {
+.center {
 	text-align: center;
 }
 

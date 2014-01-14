@@ -14,10 +14,10 @@
 
     <!-- Le styles -->
     <link href="libraries/bootstrap/css/bootstrap.cosmo.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="style.css" type="text/css" charset="UTF-8" />
-	<link rel="stylesheet" href="libraries/google-code-prettify/prettify.css" type="text/css" charset="UTF-8" /> 
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="libraries/google-code-prettify/prettify.css" type="text/css" /> 
 	<script type="text/javascript" src="libraries/google-code-prettify/prettify.js"></script>
-	<link rel="stylesheet" href="generated/stylePerso.css" type="text/css" charset="UTF-8" /> 
+	<link rel="stylesheet" href="generated/stylePerso.css" type="text/css" /> 
 	
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->

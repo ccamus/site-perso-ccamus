@@ -84,8 +84,8 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 						  <div class="checkbox">
-							<label id="checkBot" style="display:none">
-							  <input type="checkbox" name="checkBot" value="notBot"> Merci de cocher cette case afin de montrer que vous n\'&ecirc;tes pas un robot.</input>
+							<label id="labelCheckBot">
+							  
 							</label>
 						  </div>
 						</div>
@@ -102,7 +102,15 @@
 					<div class="span2"></div></div></section>
 					
 					<script type="text/javascript">
-						document.getElementById("checkBot").style.display="block";
+						var labelCheckBot = document.getElementById("labelCheckBot");
+					
+						var baliseAAjouter = document.createElement("input");
+						baliseAAjouter.setAttribute("type","checkbox");
+						baliseAAjouter.setAttribute("name","checkBot");
+						baliseAAjouter.setAttribute("value","notBot");
+						labelCheckBot.innerHTML+="Merci de cocher cette case afin de montrer que vous n\'&#234;tes pas un robot.";
+					
+						labelCheckBot.appendChild(baliseAAjouter);
 					</script>';
 				
 				//si le mec est pas logué, on détruit la session
