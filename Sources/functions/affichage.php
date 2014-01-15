@@ -35,7 +35,7 @@
 
   <body onload="prettyPrint()">';
 						
-		include("generated/menu.php");
+		include("menu.php");
 				
 		echo '	<div class="container">';
 		
@@ -91,7 +91,7 @@
       <div class="container">
 		<p class="pull-right"><span class="label label-default"><a href="#">Haut de page</a></span></p>
         <p>Site web entièrement réalisé par <a href="mailto:camus.charlie@gmail.com">Charlie Camus</a>.</p>
-        <p>Style réalisé par <a href="http://twitter.com/twitter" target="_blank">@twitter</a> : <a href="http://twitter.github.com/bootstrap/index.html">Twitter Bootstrap</a> sous la <a href="http://www.apache.org/licenses/LICENSE-2.0">licence Apache V2.0</a>.</p>
+        <p>Style réalisé avec <a href="http://twitter.com/twitter" target="_blank">@twitter</a> : <a href="http://getbootstrap.com/">Twitter Bootstrap</a> sous la <a href="http://www.apache.org/licenses/LICENSE-2.0">licence Apache V2.0</a>.</p>
         <p>Icones provenant de <a href="http://glyphicons.com">Glyphicons Free</a>, sous licence <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
       </div>
     </footer>
@@ -105,5 +105,23 @@
   
 
 </body></html>';	
+	}
+	
+	function createPanelAccordeon($titre, $contenu, $parent, $href){
+		$retour ='<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#'.$parent.'" href="#'.$href.'">';
+		$retour .= $titre;
+		$retour .= '		</a>
+						</h4>
+					</div>
+					<div id="'.$href.'" class="panel-collapse collapse">
+						<div class="panel-body">';
+		$retour .= $contenu;
+		$retour .= '	</div>
+					</div>
+				</div>';
+		return $retour;
 	}
 ?>

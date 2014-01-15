@@ -4,8 +4,9 @@
 	include('functions/bdd.php');
 	include('functions/affichage.php');
 	include('functions/other.php');
-	include('functions/contenus.php');
+	include('functions/gereUsers.php');
 	include('functions/articles.php');
+	include('functions/categorie.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut changer du contenu, le peut il?
@@ -16,44 +17,62 @@
 			
 			if(isset($_POST['articles']) && $_POST['articles']!=""){
 				//interface de changement de contenu
-				$_SESSION['articles']=$_POST['articles'];
-				$article=new Article();
-				$rep=$article->getArticleById($_POST['articles']);
-				if($rep==""){
-					echo '<form class="form-horizontal" role="form" method="post" action="modifyArticleInBase.php">
-							<legend>Modification d\'un article</legend>
-							
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="titreArticle">Titre de l\'article :</label>
-								<div class="col-sm-10">
-									<input type="text" name="titreArticle" id="titreArticle" value="'.$article->getTitre().'" class="form-control">
+				$categories = getAllCategories();
+				if(count($categories)>0){
+					// il y a des catégories, on y va !!!
+					$_SESSION['articles']=$_POST['articles'];
+					$article=new Article();
+					$rep=$article->getArticleById($_POST['articles']);
+					if($rep==""){
+						echo '<form class="form-horizontal" role="form" method="post" action="modifyArticleInBase.php">
+								<legend>Modification d\'un article</legend>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="titreArticle">Titre de l\'article :</label>
+									<div class="col-sm-10">
+										<input type="text" name="titreArticle" id="titreArticle" value="'.$article->getTitre().'" class="form-control">
+									</div>
 								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="tag">Tags :</label>
-								<div class="col-sm-10">
-									<input type="text" name="tag" id="tag" value="'.$article->getTags().'" class="form-control">
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="categ">Catégorie :</label>
+									<div class="col-sm-10">
+										<select class="form-control" name="categorie" id="categ">';
+					
+						foreach($categories as $categorie){
+							echo '			<option value="'.$categorie->getIdCategorie().'">'.$categorie->getLabelCategorie().'</option>';
+						}
+						echo '			</select>
+									</div>
 								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="contenu">Nouveau contenu :</label>
-								<div class="col-sm-10">
-									<textarea name="contenu" id="contenu" rows="20" class="form-control">'.str_replace('<br/>',"\n",$article->getContenu()).'</textarea>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="tag">Tags :</label>
+									<div class="col-sm-10">
+										<input type="text" name="tag" id="tag" value="'.$article->getTags().'" class="form-control">
+									</div>
 								</div>
-							</div>
-							
-							
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<button type="submit" class="btn btn-default">Envoyer !</button>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="contenu">Nouveau contenu :</label>
+									<div class="col-sm-10">
+										<textarea name="contenu" id="contenu" rows="20" class="form-control">'.str_replace('<br/>',"\n",$article->getContenu()).'</textarea>
+									</div>
 								</div>
-							</div>
-						</form><br/><br/><br/><br/>';
-					echoStyle();
+								
+								
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-default">Envoyer !</button>
+									</div>
+								</div>
+							</form><br/><br/><br/><br/>';
+						echoStyle();
+					}else{
+						redirAccueil($rep);
+					}
 				}else{
-					redirAccueil($rep);
+					redirAccueil("41");
 				}
 			}else{
 				echo '<form class="form-horizontal" role="form" method="post" action="modifyArticle.php">
@@ -70,7 +89,7 @@
 						
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-default">Envoyer !</button>
+								<button type="submit" class="btn btn-default">Modifier !</button>
 							</div>
 						</div>
 					</form>';

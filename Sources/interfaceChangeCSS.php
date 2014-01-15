@@ -4,7 +4,7 @@
 	include('functions/bdd.php');
 	include('functions/affichage.php');
 	include('functions/other.php');
-	include('functions/contenus.php');
+	include('functions/gereUsers.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut changer du contenu, le peut il?

@@ -3,7 +3,7 @@
 	include('functions/bdd.php');
 	include('functions/articles.php');
 	include('functions/other.php');
-	include('functions/contenus.php');
+	include('functions/gereUsers.php');
 	include('functions/apiComm.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
@@ -12,7 +12,9 @@
 			if(isset($_POST['titreArticle']) 
 				&& isset($_POST['tag']) 
 				&& isset($_POST['contenu']) 
+				&& isset($_POST['categorie']) 
 				&& $_POST['titreArticle']!=""
+				&& $_POST['categorie']!=""
 				&& $_POST['contenu']!=""){
 				
 				$article=new Article();
@@ -21,6 +23,7 @@
 				$article->setContenu($_POST['contenu']);
 				$article->setTitre($_POST['titreArticle']);
 				$article->setTags($_POST['tag']);
+				$article->setIdCategorie($_POST['categorie']);
 				$rep=$article->add();
 				
 				if($rep=="6" && isset($_POST['tweet']) && $_POST['tweet']=="tweet"){

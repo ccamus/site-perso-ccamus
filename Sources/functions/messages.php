@@ -1,12 +1,9 @@
 <?php
 $msgs = array(
     "1" => "Suppression effectuée",
-    "2" => "Pas de contenu pour ce idLien.",
-    "3" => "le label du lien que vous voulez insérer existe déjà",
     "4" => "Il faut que vous insériez du contenu",
     "5" => "Erreur d'insertion dans la base",
     "6" => "Insertion effectuée",
-    "7" => "Erreur de lecture de la base, l'idLien n'existe pas",
     "8" => "Contenu mis à jour.",
     "9" => "Vous n'êtes pas authorisé à accéder à cette partie du site",
     "10" => "Il semblerait que vous n'ayez pas utilisé la bonne page.",
@@ -36,19 +33,17 @@ $msgs = array(
     "34" => "L'article sur lequel vous cherchez à poster un commentaire n'existe pas.",
     "35" => "Ce nom d'utilisateur est réservé.",
     "36" => "Merci de renseigner un nom d'utilisateur ainsi que votre commentaire.",
-    "37" => "Erreur captcha.",
     "38" => "Erreur twitter, l'article a tout de même été correctement créé.",
     "39" => "Erreur de récupération du contenu.",
     "40" => "Merci de cocher la case indiquant que vous n'êtes pas un robot. Si vous ne voyez pas de case, merci d'activer votre javascript.",
+    "41" => "Vous devez créer des catégories avant d'ajouter ou modifier des articles.",
+    "42" => "Erreur de récupération d'une catégorie pour un article.",
 );
 $isError = array(
     "1" => "0",
-    "2" => "1",
-    "3" => "1",
     "4" => "1",
     "5" => "1",
     "6" => "0",
-    "7" => "1",
     "8" => "0",
     "9" => "1",
     "10" => "1",
@@ -78,10 +73,11 @@ $isError = array(
     "34" => "1",
     "35" => "1",
     "36" => "1",
-    "37" => "1",
     "38" => "1",
     "39" => "1",
     "40" => "1",
+    "41" => "1",
+    "42" => "1",
 );
 
 ?>

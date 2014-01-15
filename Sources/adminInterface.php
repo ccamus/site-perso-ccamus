@@ -4,7 +4,7 @@
 	include('functions/InstallInfo.php');
 	include('functions/affichage.php');
 	include('functions/other.php');
-	include('functions/contenus.php');
+	include('functions/gereUsers.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut ajouter du contenu, le peut il?
@@ -85,10 +85,12 @@
 								<legend>Gestion des articles</legend>
 							</div>
 							
+							<span class="glyphicon glyphicon-book"></span> <a href="gereCategories.php">Gérer les catégories</a><br/>
+							<br/><br/>
 							<span class="glyphicon glyphicon-pencil"></span><a href="ajoutArticle.php">Ajouter un article</a><br/>
 							<span class="glyphicon glyphicon-folder-open"></span> <a href="modifyArticle.php">Modifier un article</a><br/>
 							<span class="glyphicon glyphicon-trash"></span></i> <a href="deleteArticle.php">Supprimer un article</a><br/>
-							
+							<br/><br/>
 							<div class="controls">
 								<legend>Gestion des Commentaires</legend>
 							</div>
@@ -102,10 +104,6 @@
 							<div class="controls">
 								<legend>Gestion du contenu</legend>
 							</div>
-							<span class="glyphicon glyphicon-pencil"></span> <a href="ajouContenu.php">Ajouter du Contenu</a><br/>
-							<span class="glyphicon glyphicon-folder-open"></span> <a href="interfaceChangeContenu.php">Changer du Contenu</a><br/>
-							<span class="glyphicon glyphicon-trash"></span> <a href="deleteContenu.php">Supprimer du Contenu</a><br/>
-							<br/><br/>
 							<span class="glyphicon glyphicon-upload"></span> <a href="addFile.php">Envoyer un fichier sur le serveur</a><br/>
 							<span class="glyphicon glyphicon-trash"></span> <a href="affiFile.php">Voir et/ou supprimer des fichiers sur le serveur</a><br/>
 							<br/><br/>
