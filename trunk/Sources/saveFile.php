@@ -4,7 +4,8 @@
 	include('functions/bdd.php');
 	include('functions/affichage.php');
 	include('functions/other.php');
-	include('functions/contenus.php');
+	include('functions/gereUsers.php');
+	include('functions/fichier.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd']) && isExist($_SESSION['userName'],$_SESSION['pwd'])){
 		$erreur="";

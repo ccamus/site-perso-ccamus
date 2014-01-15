@@ -10,6 +10,7 @@ class Article{
 	private $contenu;
 	private $titre;
 	private $tags;
+	private $idCategorie;
 	
 	//Récupère un article selon son id
 	public function getArticleById($id){
@@ -20,7 +21,7 @@ class Article{
 		}else{
 			$bdd=new BddConnector();
 			
-			$requete="SELECT dateArticle, contenu, titre, tags FROM contenuPage, article WHERE idArticle=:idArt AND contenuPage.idContenu=article.idContenu ;";
+			$requete="SELECT dateArticle, contenu, titre, tags, idCategorie FROM  article WHERE idArticle=:idArt ;";
 			
 			try{
 				$stmt = $bdd->getConnexion()->prepare($requete);
@@ -38,6 +39,7 @@ class Article{
 					$this->contenu=$row['contenu'];
 					$this->titre=$row['titre'];
 					$this->tags=$row['tags'];
+					$this->idCategorie=$row['idCategorie'];
 				}				
 			}
 			catch(PDOException $e){
@@ -60,44 +62,22 @@ class Article{
 		}
 		
 		$bdd=new BddConnector();
-		//insertion du this->contenu
-		$requete="INSERT INTO contenuPage (contenu) VALUES (:contenu);";
 		try{
-			$stmt = $bdd->getConnexion()->prepare($requete);
-			$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
-			$stmt->execute(); 				
-			if(is_object($stmt)){$stmt->closeCursor();}
-			//récupération de l'id du contenu		
-			$requete="SELECT idContenu FROM contenuPage WHERE contenu=:contenu;";
-			
-			$stmt = $bdd->getConnexion()->prepare($requete);
-			$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
-			$stmt->execute(); 		
-			$row=$stmt->fetch();
-			if(is_object($stmt)){$stmt->closeCursor();}
-			$bdd->deconnexion();
-
-			if(!isset($row['idContenu'])){
-				$bdd->deconnexion();
-				return "5";
-			}else{
-				$id=$row['idContenu'];
-			}
-			
 			//insertion dans la table article	
-			$requete="INSERT INTO article (dateArticle,titre,tags,idContenu) VALUES (:date, :titre, :tags, :idContenu);";
+			$requete="INSERT INTO article (dateArticle,titre,tags,contenu,idCategorie) VALUES ( :date, :titre, :tags, :contenu, :idCategorie );";
 			$stmt = $bdd->getConnexion()->prepare($requete);
 			$stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
 			$stmt->bindValue(':titre', $this->titre, PDO::PARAM_STR);
 			$stmt->bindValue(':tags', $this->tags, PDO::PARAM_STR);
-			$stmt->bindValue(':idContenu', $id, PDO::PARAM_STR);
+			$stmt->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
+			$stmt->bindValue(':idCategorie', $this->idCategorie, PDO::PARAM_STR);
 			$stmt->execute();
 			if(is_object($stmt)){$stmt->closeCursor();}
 			//récupération de l'id du contenu	
-			$requete="SELECT idArticle FROM article WHERE idContenu=:id;";
+			$requete="SELECT idArticle FROM article WHERE dateArticle= :date ;";
 			
 			$stmt = $bdd->getConnexion()->prepare($requete);
-			$stmt->bindValue(':id', $id, PDO::PARAM_STR);
+			$stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
 			$stmt->execute(); 		
 			$row=$stmt->fetch();
 			if(is_object($stmt)){$stmt->closeCursor();}
@@ -109,7 +89,7 @@ class Article{
 				$this->idArticle=$row['idArticle'];
 			}
 		}
-		catch(PDOException $e){
+		catch(PDOException $e){echo $e;
 			$bdd->deconnexion();
 			return "26";
 		}
@@ -121,40 +101,29 @@ class Article{
 	function delete(){
 		$rep="1";
 		
-		//Récupération de l'id contenu		
-		$idContenu=$this->getIdContenuParIdArticle($this->idArticle);
-		if($idContenu=="ERROR"){
-			$rep="25";
-		}else{
-			$bdd=new BddConnector();
-			try{
-				//récupération de l'id du contenu		
-				$requete2="DELETE FROM article WHERE idArticle=:idArticle;";
-				$requete3="DELETE FROM contenuPage WHERE idContenu=:idContenu;";
-				$requete4="DELETE FROM commentaire WHERE idArticle=:idArticle;";
-				
-				$stmt2 = $bdd->getConnexion()->prepare($requete2);
-				$stmt3 = $bdd->getConnexion()->prepare($requete3);
-				$stmt4 = $bdd->getConnexion()->prepare($requete4);
-				
-				$stmt2->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
-				$stmt3->bindValue(':idContenu', $idContenu, PDO::PARAM_STR);
-				$stmt4->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
-				
-				$stmt2->execute(); 	
-				if(is_object($stmt2)){$stmt2->closeCursor();}
-				$stmt3->execute(); 	
-				if(is_object($stmt3)){$stmt3->closeCursor();}
-				$stmt4->execute(); 	
-				if(is_object($stmt4)){$stmt4->closeCursor();}
-								
-			}
-			catch(PDOException $e){
-				$bdd->deconnexion();
-				$rep="26";
-			}
-			$bdd->deconnexion();
+		$bdd=new BddConnector();
+		try{
+			//récupération de l'id du contenu		
+			$requete2="DELETE FROM article WHERE idArticle=:idArticle;";
+			$requete4="DELETE FROM commentaire WHERE idArticle=:idArticle;";
+			
+			$stmt2 = $bdd->getConnexion()->prepare($requete2);
+			$stmt4 = $bdd->getConnexion()->prepare($requete4);
+			
+			$stmt2->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
+			$stmt4->bindValue(':idArticle', $this->idArticle, PDO::PARAM_STR);
+			
+			$stmt2->execute(); 	
+			if(is_object($stmt2)){$stmt2->closeCursor();}
+			$stmt4->execute(); 	
+			if(is_object($stmt4)){$stmt4->closeCursor();}
 		}
+		catch(PDOException $e){
+			$bdd->deconnexion();
+			$rep="26";
+		}
+		$bdd->deconnexion();
+		
 		
 		return $rep;
 	}
@@ -168,36 +137,16 @@ class Article{
 			
 			$bdd=new BddConnector();
 			try{
-				//récupération de l'idContenu
-				$requete="SELECT idContenu FROM article WHERE idArticle=:id;";
-			
-				$stmt = $bdd->getConnexion()->prepare($requete);
-				$stmt->bindValue(':id', $this->idArticle, PDO::PARAM_STR);
-				$stmt->execute(); 		
-				
-				if($row=$stmt->fetch()){
-					if(is_object($stmt)){$stmt->closeCursor();}
-					$idContenu=$row['idContenu'];
-					
-					//insertion dans la table du nouveau contenu
-					$requete2="UPDATE article SET titre=:titre, tags=:tags WHERE idArticle=:id ;";
-					$stmt2 = $bdd->getConnexion()->prepare($requete2);
-					$stmt2->bindValue(':titre', $this->titre, PDO::PARAM_STR);
-					$stmt2->bindValue(':tags', $this->tags, PDO::PARAM_STR);
-					$stmt2->bindValue(':id', $this->idArticle, PDO::PARAM_STR);
-					$stmt2->execute();
-					if(is_object($stmt2)){$stmt2->closeCursor();}
-					
-					//insertion dans la table du nouveau contenu
-					$requete3="UPDATE contenuPage SET contenu=:contenu WHERE idContenu=:id ;";
-					$stmt3 = $bdd->getConnexion()->prepare($requete3);
-					$stmt3->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
-					$stmt3->bindValue(':id', $idContenu, PDO::PARAM_STR);
-					$stmt3->execute();		
-					if(is_object($stmt3)){$stmt3->closeCursor();}
-				}else{
-					return "39";
-				}				
+				//insertion dans la table du nouveau contenu
+				$requete2="UPDATE article SET titre=:titre, tags=:tags, contenu=:contenu, idCategorie=:idCategorie WHERE idArticle=:id ;";
+				$stmt2 = $bdd->getConnexion()->prepare($requete2);
+				$stmt2->bindValue(':titre', $this->titre, PDO::PARAM_STR);
+				$stmt2->bindValue(':tags', $this->tags, PDO::PARAM_STR);
+				$stmt2->bindValue(':contenu', $this->contenu, PDO::PARAM_STR);
+				$stmt2->bindValue(':id', $this->idArticle, PDO::PARAM_STR);
+				$stmt2->bindValue(':idCategorie', $this->idCategorie, PDO::PARAM_STR);
+				$stmt2->execute();
+				if(is_object($stmt2)){$stmt2->closeCursor();}
 			}
 			catch(PDOException $e){
 				$bdd->deconnexion();
@@ -207,31 +156,6 @@ class Article{
 		}
 		
 		return $rep;
-	}
-	
-	private function getIdContenuParIdArticle($idArticle){
-	
-		$retour="ERROR";
-	
-		$bdd=new BddConnector();
-		//Récupération de l'id contenu
-		$requete="SELECT idContenu FROM article WHERE idArticle=:id;";
-		try{
-			$stmt = $bdd->getConnexion()->prepare($requete);
-			$stmt->bindValue(':id', $idArticle, PDO::PARAM_STR);
-			$stmt->execute(); 	
-			$row=$stmt->fetch();	
-			if(is_object($stmt)){$stmt->closeCursor();}
-			if(isset($row['idContenu'])){
-				$retour=$row['idContenu'];
-			}			
-		}
-		catch(PDOException $e){
-			$bdd->deconnexion();
-		}
-		
-		$bdd->deconnexion();
-		return $retour;	
 	}
 	
 	public function getIdArticle(){
@@ -285,13 +209,21 @@ class Article{
 	
 	public function addCommentaire($commentaire){
 		$commentaire->add();;
-	}	
+	}
+	
+	public function getIdCategorie(){
+		return $this->idCategorie;
+	}
+	
+	public function setIdCategorie($idCategorie){
+		$this->idCategorie=$idCategorie;
+	}
 }
 
 function listArticlesForModify(){
 	$bdd=new BddConnector();
 	
-	$sortie="<select name='articles' class='form-control'>";
+	$sortie="<select multiple name='articles' class='form-control'>";
 	
 	$requete="SELECT idArticle, titre FROM article ;";
 	
@@ -312,6 +244,29 @@ function listArticlesForModify(){
 	$sortie=$sortie."</select>";
 	
 	return $sortie;
+}
+
+function getMoisArticles(){
+	$bdd=new BddConnector();
+	$retour = null;
+		
+	$requete="SELECT DISTINCT strftime ( '%m-%Y' , dateArticle ) as m FROM article ORDER BY dateArticle DESC ;";
+	
+	try{
+		$stmt = $bdd->getConnexion()->prepare($requete);
+		$stmt->execute();
+		
+		while($row=$stmt->fetch()){
+			$retour[] = $row['m'];
+		}		
+		if(is_object($stmt)){$stmt->closeCursor();}
+		$bdd->deconnexion();		
+	}
+	catch(PDOException $e){
+		$bdd->deconnexion();				
+	}
+		
+	return $retour;
 }
 
 ?>

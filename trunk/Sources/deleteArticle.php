@@ -4,7 +4,7 @@
 	
 	include('functions/bdd.php');
 	include('functions/other.php');
-	include('functions/contenus.php');
+	include('functions/gereUsers.php');
 	include('functions/affichage.php');
 	include('functions/articles.php');
 	
