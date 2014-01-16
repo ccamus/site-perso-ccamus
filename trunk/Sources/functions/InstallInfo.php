@@ -4,6 +4,14 @@
 	 * Nom du site tel qu'il va apparaitre sur l'interface
 	 */
 	$siteName='@Charlie';
+	/*
+	 * Nom du possesseur du site
+	 */
+	$nom='Camus';
+	/*
+	 * Prénom du possesseur du site
+	 */
+	$prenom='Charlie';
 
 	/*
 	 * Endroit où est située la base de donnée
