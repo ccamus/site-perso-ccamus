@@ -38,6 +38,10 @@ $msgs = array(
     "40" => "Merci de cocher la case indiquant que vous n'êtes pas un robot. Si vous ne voyez pas de case, merci d'activer votre javascript.",
     "41" => "Vous devez créer des catégories avant d'ajouter ou modifier des articles.",
     "42" => "Erreur de récupération d'une catégorie pour un article.",
+    "43" => "CV PDF correctement mis en ligne.",
+    "44" => "Erreur lors du transfert du CV en pdf.",
+    "45" => "Erreur lors de la modification du CV.",
+    "46" => "CV correctement modifié.",
 );
 $isError = array(
     "1" => "0",
@@ -78,6 +82,10 @@ $isError = array(
     "40" => "1",
     "41" => "1",
     "42" => "1",
+    "43" => "0",
+    "44" => "1",
+    "45" => "1",
+    "46" => "0",
 );
 
 ?>

@@ -109,6 +109,11 @@
 							<br/><br/>
 							<span class="glyphicon glyphicon-picture"></span> <a href="interfaceChangeCSS.php">Modifier les styles personnalisés</a><br/>
 							<span class="glyphicon glyphicon-picture"></span> <a href="interfaceChangeHeadAccueil.php">Modifier le header d\'accueil</a><br/>
+							<br/><br/>
+							<div class="controls">
+								<legend>Gestion des CV</legend>
+							</div>
+							<span class="glyphicon glyphicon-briefcase"></span> <a href="gereCVs.php">Gérer les CV</a><br/>
 							
 						</div>
 					</div>
