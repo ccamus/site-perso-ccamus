@@ -5,6 +5,7 @@
 	include('functions/affichage.php');
 	include('functions/other.php');
 	include('functions/gereUsers.php');
+	include('functions/commentaire.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut ajouter du contenu, le peut il?
@@ -94,7 +95,7 @@
 							<div class="controls">
 								<legend>Gestion des Commentaires</legend>
 							</div>
-							
+							<span class="badge">'.countAllArticles().'</span> Commentaires postés.<br/>
 							La gestion des commentaires se fait sur la page de visualisation des articles.
 							
 						</div>

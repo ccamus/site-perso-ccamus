@@ -111,7 +111,7 @@
 				$toAffich .= '...<span class="label label-primary"><a href="visuArticle.php?art='.$article->getIdArticle().'">Lire la suite</a></span>';
 			}
 			$nb=$article->getCountCommentaires();
-			$toAffich .= '<br/><small><a href="visuArticle.php?art='.$article->getIdArticle().'#com"><span class="badge badge-info">'.$nb.'</span> commentaire';
+			$toAffich .= '<br/><small><a href="visuArticle.php?art='.$article->getIdArticle().'#com"><span class="badge">'.$nb.'</span> commentaire';
 			if($nb>1){$toAffich .= "s";}
 			$toAffich .= '</a></small>';
 			$toAffich .= '<p class="pull-right"><span class="glyphicon glyphicon-tag"></span> <small>'.$article->getTags().'</small></p></div>';

@@ -232,4 +232,28 @@ function countCommentaireByArticle($idArticle){
 	return $rep;
 }
 
+function countAllArticles(){
+	$rep="";
+	
+	$bdd=new BddConnector();
+	try{	
+		$requete="select count(idCommentaire) as c
+				from commentaire";
+		$stmt = $bdd->getConnexion()->prepare($requete);
+		$stmt->execute();
+		
+		if($row=$stmt->fetch()){
+			$rep=$row['c'];
+		}
+		if(is_object($stmt)){$stmt->closeCursor();}
+	}
+	catch(PDOException $e){
+		$bdd->deconnexion();
+		$rep="";
+	}
+	$bdd->deconnexion();
+		
+	return $rep;
+}
+
 ?>
