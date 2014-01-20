@@ -7,6 +7,7 @@
 	include('functions/articles.php');
 	include('functions/commentaire.php');
 	include('functions/categorie.php');
+	include('functions/gereUsers.php');
 		
 	if(isset($_GET['art']) && is_numeric($_GET['art'])){
 		
