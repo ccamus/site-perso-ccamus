@@ -44,7 +44,7 @@
 						
 						echo '<span class="glyphicon glyphicon-user"></span> <small>'.$commentaire->getCommentateur().'</small>';
 						echo '<p class="pull-right"><span class="glyphicon glyphicon-calendar"></span> <small>'.$commentaire->getDateComm().'</small></p><br/>';
-						echo $commentaire->getCommentaire();
+						echo stripcslashes($commentaire->getCommentaire());
 						if($isAdmin){
 							//C'est un admin ?
 							echo '<br/><p class="pull-right"><small><a href="deleteComm.php?com='.$commentaire->getIdCommentaire().'&art='.$_GET['art'].'">Supprimer</a></small></p>';
@@ -69,7 +69,7 @@
 								<input type="text" class="form-control" name="commentateur" id="commentateur" placeholder="Votre nom" value="';
 					//si il y a un nom en session on prends
 					if(isset($_SESSION['nomCommentateur'])){
-						echo $_SESSION['nomCommentateur'];
+						echo stripcslashes($_SESSION['nomCommentateur']);
 					}
 					echo		'">
 							</div>
@@ -81,7 +81,7 @@
 								<textarea name="commentaire" id="commentaire" placeholder="Votre commentaire" rows="3" class="form-control">';
 					//si il y a un commentaire en session on prends		
 					if(isset($_SESSION['commentaire'])){
-						echo $_SESSION['commentaire'];
+						echo stripcslashes($_SESSION['commentaire']);
 					}
 					echo		'</textarea>
 							</div>
