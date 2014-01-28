@@ -54,3 +54,7 @@ span.label.label-default > a {
 .label {
 	border-radius:4px;
 }
+
+.entreeEMail{
+	display:none;
+}
