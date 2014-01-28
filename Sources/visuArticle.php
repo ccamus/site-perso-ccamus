@@ -96,7 +96,9 @@
 							  </div>
 							</div>
 						</div>
-						<input type="hidden" name="email" value="" /> 
+						<div class="entreeEMail">
+							<input type="text" name="email" value="" />
+						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<button type="submit" class="btn btn-default">Envoyer !</button>
