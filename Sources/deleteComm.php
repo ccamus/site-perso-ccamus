@@ -6,6 +6,7 @@
 	include('functions/other.php');
 	include('functions/gereUsers.php');
 	include('functions/commentaire.php');
+	include('functions/rss.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		if(isExist($_SESSION['userName'],$_SESSION['pwd'])){
@@ -14,6 +15,8 @@
 				$commentaire->setIdCommentaire($_GET['com']);
 				
 				$rep=$commentaire->delete();
+				
+				genereCommentaireRSS();
 				
 				redirVisuArticle($_GET['art'],$rep);	
 			}else{

@@ -42,6 +42,7 @@ $msgs = array(
     "44" => "Erreur lors du transfert du CV en pdf.",
     "45" => "Erreur lors de la modification du CV.",
     "46" => "CV correctement modifié.",
+    "47" => "Erreur a la génération du flux rss.",
 );
 $isError = array(
     "1" => "0",
@@ -86,6 +87,7 @@ $isError = array(
     "44" => "1",
     "45" => "1",
     "46" => "0",
+    "47" => "1",
 );
 
 ?>

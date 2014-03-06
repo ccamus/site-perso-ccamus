@@ -92,6 +92,11 @@
 						,'accordion'
 						, 'collapseTwo');
 	}
+	// Flux rss
+	$toAffich .= createPanelAccordeon('Flux RSS'
+						,'<ul class="nav nav-pills nav-stacked"><a href="RSS/articlesFeed.xml" target="_blank"><img src="libraries/glyphicons_social_37_rss.png"></img> Flux des articles</a><br/><br/><a href="RSS/commentairesFeed.xml" target="_blank"><img src="libraries/glyphicons_social_37_rss.png"></img> Flux des commentaires</a></ul>'
+						,'accordion'
+						, 'collapseThree');
 	// Fermeture de l'accordéon
 	$toAffich .= '</div></div><div class="col-md-9">';
 	

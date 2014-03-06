@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"><channel><title>@Charlie articles</title><link>http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources</link><description>Liste des articles pour le site @Charlie</description><item><title>Bonzaï, deux mois plus tard</title><category>Jardinage</category><link>http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources/visuArticle.php?art=6</link><pubDate>2014-01-06 11:29:22</pubDate><description>Voilà deux mois que j'ai mon premier bonzaï, et les fêtes de fin d'année m'on permit de prendre un petit nouveau avec moi :
+
+<div class="center"><img src='donnes/IMG_20140105_192842.jpg' alt='bonzaï' /></div>
+
+Sur cette photo vous pouvez voir cette jeune pousse (il doit avoir 2 ou 3 ans) fraichement taillé. Pour la taille, j'ai simplement fait une taille d'entretien. C'est à dire qu'on coupe les branches de sorte que le bonzaï garde sa forme et conserve des feuilles de petites tailles. On ne peut pas couper n'importe quelles branches, il faut attendre qu'elles soient assez grande (elles doivent avoir au moins 8 feuilles). Il ne faut pas couper n'importe où non pl</description></item><item><title>Raspberry pi Juke box</title><category>Informatique perso</category><link>http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources/visuArticle.php?art=5</link><pubDate>2013-12-03 19:27:21</pubDate><description>Depuis quelques temps, je cherchais à transformer mon raspberry pi en juke box. L'idée était de stocker toute ma musique dessus, et de pouvoir faire mes playlists et gérer ma musique depuis mes autres appareils (tablette, pc, téléphone portable).
+J'ai trouvé la solution logiciel à cette idée au travers de MPD. MPD, très simplement, est un outil de gestion de musique client-serveur.
+
+Plein de joie en apprenant l'existance d'un outil qui me permet de faire ce que je veux simplement, je me suis lancé dans son installation et sa configuration. Très vite je me suis rendu compte que ça n'était pas aussi simple, car gérer le son sur Linux, c'est pas de la tarte !
+</description></item><item><title>Dev Fest Nantes 2013</title><category>Informatique pro</category><link>http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources/visuArticle.php?art=4</link><pubDate>2013-11-21 18:41:46</pubDate><description>C’est le 8 novembre 2013 qu’eut lieu, cette année le dev’ fest Nantes, journée de conférences qui prit place dans un mouvement mondial d’évènements et d’échange autour d’un certain nombre de technologies, et pas que des technologies Google. C’est dans les locaux de l’école Epitech qu’eurent lieu les conférences.
+Dés l’accueil on se sent bien imprégné par l’atmosphère Google. Distribution de Goodies, t-shirt, et de KitKat (la nouvelle version d’Android est sponsorisée par Nestlé et se nomme KitKat). En dehors des conférences, on a pu observer quelques stands, notamment un où les Oculus rift (lunettes de réalité virtuelle, mieux que les Google gl</description></item><item><title>Bonzaï, jour 1. Maintenir en vie</title><category>Jardinage</category><link>http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources/visuArticle.php?art=3</link><pubDate>2013-11-10 12:28:03</pubDate><description>Hier, je me suis enfin lancé, depuis le temps que ces petites arbres m'attiraient, il était temps que je m'achète mon premier bonzaï !
+
+<div class="center"><img src='donnes/IMG_20131110_121829.jpg' alt='Logo Raspberry PI' /></div>
+
+On ne panique pas, il ne faut pas être un professionel du jardinage pour maintenir en vie un bonzaï. Cependant, il faut être bien informé. C'est pourquoi j'ai aussi acheté un livre explicatif sur la manière d'entretenir mon nouvel achat.
+Après lecture de mon livre, je me suis rendu compte que la forme actuelle de mon bonzaï ne correspondait pas vraiment à ce que l'on pouvait en faire. Mais, ne me précipitant pas, je me donnai</description></item><item><title>Un projet pour la MNH</title><category>Informatique pro</category><link>http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources/visuArticle.php?art=2</link><pubDate>2013-03-26 16:51:08</pubDate><description>Cela fait quelques temps que je suis resté au point mort ici, je vais donc profiter d'un petit moment de répits pour décrire mon environnement de travail.
+
+<div class="soulign">Contexte</div>
+Je suis à Paris pour travailler sur un projet pour la MNH (Mutuelle nationale hospitalière). Pour faire simple, c'est la refont de leur application de gestion de dossiers. L'architecture maintenant :
+
+<div class="soulign">Architecture</div>
+Nous développons en java J2E sur un serveur d'application Tomcat 7 installé sur une machine debian. Notre application fonctionne avec le système très connu du MVC : 
+La vue est composée d'une couche xhtml, elle est, elle m</description></item><item><title>Nouvelle version du site : 5.1</title><category>Informatique perso</category><link>http://rasbi.hd.free.fr:8012/devSitePerso/site-perso-ccamus/Sources/visuArticle.php?art=1</link><pubDate>2012-11-28 10:15:59</pubDate><description>Bonjour,
+
+Voici la nouvelle version de mon site web.
+
+Celle-ci intègre maintenant une partie blog. L'architecture a aussi été modifiée et quelques autres fonctionnalités ont été ajoutés.
+
+Pour l'instant, les commentaires ne sont pas actifs du fait que l'hébergeur gratuit free n'accepte pas la communication avec les api externes (donc pas de captcha).
+
+Les ajout de la version 5.1 :
+- Ajout d'une partie blog (gestion d'articles, gestion de commentaires).
+- Modification de l'architecture, développement avec versionning, mise en place de tests unitaires pour les nouveaux modules.
+- Gestion des tags, et du titre des pages.
+- Aj</description></item></channel></rss>

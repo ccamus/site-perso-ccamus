@@ -5,6 +5,7 @@
 	include('functions/articles.php');
 	include('functions/other.php');
 	include('functions/gereUsers.php');
+	include('functions/rss.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut changer du contenu, le peut il?
@@ -22,6 +23,13 @@
 				$article->setIdCategorie($_POST['categorie']);
 				
 				$rep=$article->modify();
+				
+				// Génération du rss
+				if($rep=="8"){
+					if(!genereArticleRSS()){
+						$rep = "47";
+					}
+				}
 				
 				redirAccueil($rep);
 			}else{

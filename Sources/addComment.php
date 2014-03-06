@@ -3,6 +3,7 @@
 	include('functions/other.php');
 	include('functions/gereUsers.php');
 	include('functions/commentaire.php');
+	include('functions/rss.php');
 	session_start();
 	
 	if(isset($_GET['art']) && $_GET['art']!="" && is_numeric($_GET['art'])){
@@ -51,6 +52,8 @@
 							if($rep!="33"){
 								$_SESSION['nomCommentateur']=$_POST['commentateur'];
 								$_SESSION['commentaire']=$_POST['commentaire'];
+							}else{
+								genereCommentaireRSS();
 							}
 							redirVisuArticle($_GET['art'],$rep);								
 					}
