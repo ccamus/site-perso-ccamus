@@ -5,6 +5,7 @@
 	include('functions/other.php');
 	include('functions/gereUsers.php');
 	include('functions/apiComm.php');
+	include('functions/rss.php');
 	
 	if(isset($_SESSION['userName']) && isset($_SESSION['pwd'])){
 		//il veut ajouter du contenu, le peut il?
@@ -17,6 +18,7 @@
 				&& $_POST['categorie']!=""
 				&& $_POST['contenu']!=""){
 				
+				// Insertion de l'article
 				$article=new Article();
 				
 				$article->setDate(date("Y-m-d H:i:s"));
@@ -25,6 +27,13 @@
 				$article->setTags($_POST['tag']);
 				$article->setIdCategorie($_POST['categorie']);
 				$rep=$article->add();
+				
+				// Génération du rss
+				if($rep=="6"){
+					if(!genereArticleRSS()){
+						$rep = "47";
+					}
+				}
 				
 				if($rep=="6" && isset($_POST['tweet']) && $_POST['tweet']=="tweet"){
 					include('functions/InstallInfo.php');
@@ -39,7 +48,7 @@
 				redirAccueil("16");
 			}
 		}else{
-		redirAccueil("9");	
+			redirAccueil("9");	
 		}
 	}else{
 		redirAccueil("9");		
