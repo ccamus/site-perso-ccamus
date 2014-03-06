@@ -13,7 +13,7 @@
     echo '<meta name="author" content="Charlie Camus">
 
     <!-- Le styles -->
-    <link href="libraries/bootstrap/css/bootstrap.cosmo.min.css" rel="stylesheet">
+    <link href="libraries/bootstrap/css/bootstrap.lumen.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="libraries/google-code-prettify/prettify.css" type="text/css" /> 
 	<script type="text/javascript" src="libraries/google-code-prettify/prettify.js"></script>

@@ -38,9 +38,12 @@ a{
 	background-image: url(donnes/head.png);
 	background-repeat:no-repeat;
 	background-position:left bottom;
-	color : #FFFFFF;
 	height : 250px;
 	background-color : #B0B0B0;
+}
+
+.header h1, h2, h3{
+	color : #FFFFFF;
 }
 
 span.label.label-primary > a {
