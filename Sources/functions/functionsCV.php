@@ -32,13 +32,13 @@
 		$retour = false;
 		switch ($cv) {
 			case 1:
-				$retour = writeGeneratedFile("CV/cvLong.html", $contenu);
+				$retour = writeGeneratedFile("CV/cvLong.html", stripslashes($contenu));
 				break;
 			case 2:
-				$retour = writeGeneratedFile("CV/cvCourt.html", $contenu);
+				$retour = writeGeneratedFile("CV/cvCourt.html", stripslashes($contenu));
 				break;
 			case 3:
-				$retour = writeGeneratedFile("CV/cvAnglais.html", $contenu);
+				$retour = writeGeneratedFile("CV/cvAnglais.html", stripslashes($contenu));
 				break;
 		}
 		return $retour;

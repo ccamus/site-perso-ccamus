@@ -24,7 +24,10 @@
 				$items .= '<category>'.$row['labelCategorie'].'</category>';
 				$items .= '<link>'.$localisationServeur.'/visuArticle.php?art='.$row['idArticle'].'</link>';
 				$items .= '<pubDate>'.$row['dateArticle'].'</pubDate>'; 
-				$items .= '<description>'.str_replace('<br/>',"\n",substr($row['contenu'],0,700)).'</description>';
+				$contenu = str_replace('<br/>',"\n",substr(stripslashes($row['contenu']),0,700));
+				$contenu = str_replace('<','&lt;',$contenu);
+				$contenu = str_replace('>','&gt;',$contenu);
+				$items .= '<description>'.$contenu.'</description>';
 				$items .= '</item>';
 			}
 			
@@ -67,7 +70,10 @@
 				$items .= '<title>Commentaire sur l\'article '.$row['titre'].'</title>';
 				$items .= '<link>'.$localisationServeur.'/visuArticle.php?art='.$row['idArticle'].'#com</link>';
 				$items .= '<pubDate>'.$row['dateComm'].'</pubDate>'; 
-				$items .= '<description>'.$row['commentateur'].' a posté le commentaire : '.str_replace('<br/>',"\n",substr($row['commentaire'],0,700)).'</description>';
+				$commentaire = str_replace('<br/>',"\n",substr(stripslashes($row['commentaire']),0,700));
+				$commentaire = str_replace('<','&lt;',$commentaire);
+				$commentaire = str_replace('>','&gt;',$commentaire);
+				$items .= '<description>'.$row['commentateur'].' a posté le commentaire : '.$commentaire.'</description>';
 				$items .= '</item>';
 			}
 			
